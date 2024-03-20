@@ -1,1 +1,5 @@
-rootProject.name = 'server'
+rootProject.name = 'surbear-server'
+
+include("surbear-api")
+include("surbear-core")
+include("surbear-helper")
