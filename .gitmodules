@@ -1,0 +1,4 @@
+[submodule "surbear-config"]
+	path = surbear-config
+	url = https://github.com/SurBear-Team/surbear-config.git
+    branch = master
