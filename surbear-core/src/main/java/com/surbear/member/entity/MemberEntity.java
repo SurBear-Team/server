@@ -1,10 +1,10 @@
 package com.surbear.member.entity;
 
-import com.surbear.common.BaseTimeEntity;
+import com.surbear.common.entity.BaseTimeEntity;
+import com.surbear.member.model.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.stereotype.Component;
 
 @Getter
 @Builder
@@ -30,7 +30,11 @@ public class MemberEntity extends BaseTimeEntity {
     String phoneNumber;
 
     @Column
-    String point;
+    Integer point;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private Role role;
 
     @Column
     Boolean deleted;
