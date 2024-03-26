@@ -1,4 +1,4 @@
-package com.surbear.common;
+package com.surbear.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
