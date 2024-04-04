@@ -45,6 +45,4 @@ public class ServeyQuestionEntity extends BaseTimeEntity {
     @Column
     boolean deleted = false;
 
-
-
 }
