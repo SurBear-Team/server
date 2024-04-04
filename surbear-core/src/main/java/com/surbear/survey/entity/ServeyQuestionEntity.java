@@ -1,7 +1,7 @@
 package com.surbear.survey.entity;
 
+import com.surbear.common.entity.BaseTimeEntity;
 import com.surbear.survey.model.QuestionType;
-import com.surbear.survey.model.SurveyType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -13,22 +13,14 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "question")
-public class QuestionEntity {
+@Table(name = "questions")
+public class ServeyQuestionEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "question_id")
     Long id;
-
-    @Column
-    String question;
-
-    @Column
-    Boolean essential;
-
-    @Column
-    Integer page;
 
     @Column
     String serveyId;
@@ -36,6 +28,22 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private QuestionType questionType;
+
+    @Column
+    String content;
+
+    @Column
+    Boolean required;
+
+    @Column
+    Integer page;
+
+    @Column
+    Integer maxText;
+
+    @Builder.Default
+    @Column
+    boolean deleted = false;
 
 
 
