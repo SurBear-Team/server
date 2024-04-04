@@ -19,11 +19,10 @@ public class ServeyQuestionEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(name = "question_id")
     Long id;
 
     @Column
-    String serveyId;
+    Long serveyId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)

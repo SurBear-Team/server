@@ -17,6 +17,7 @@ public class PointHistoryEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     Long id;
 
     @Column

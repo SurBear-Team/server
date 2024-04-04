@@ -19,7 +19,6 @@ public class MemberEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(name = "member_id")
     Long id;
 
     @Enumerated(EnumType.STRING)

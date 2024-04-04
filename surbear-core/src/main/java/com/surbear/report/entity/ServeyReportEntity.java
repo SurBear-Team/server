@@ -17,13 +17,14 @@ public class ServeyReportEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     Long id;
 
     @Column
-    String reporterId;
+    Long reporterId;
 
     @Column
-    String serveyId;
+    Long serveyId;
 
     @Column
     String reason;

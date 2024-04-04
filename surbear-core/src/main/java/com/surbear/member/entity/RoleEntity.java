@@ -19,7 +19,6 @@ public class RoleEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(name = "role_id")
     Long id;
 
     @Column
