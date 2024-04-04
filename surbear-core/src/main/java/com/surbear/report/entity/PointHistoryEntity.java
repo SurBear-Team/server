@@ -31,6 +31,8 @@ public class PointHistoryEntity extends BaseTimeEntity {
     @Column
     Long paidPoint;
 
+    @Builder.Default
     @Column
-    Boolean deleted;
+    boolean deleted = false;
+
 }

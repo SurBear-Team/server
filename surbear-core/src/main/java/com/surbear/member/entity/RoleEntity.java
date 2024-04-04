@@ -32,4 +32,5 @@ public class RoleEntity extends BaseTimeEntity {
     @Builder.Default
     @Column
     boolean deleted = false;
+
 }

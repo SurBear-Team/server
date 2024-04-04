@@ -28,6 +28,8 @@ public class ServeyReportEntity extends BaseTimeEntity {
     @Column
     String reason;
 
+    @Builder.Default
     @Column
-    Boolean deleted;
+    boolean deleted = false;
+
 }

@@ -3,7 +3,6 @@ package com.surbear.member.entity;
 import com.surbear.common.entity.BaseTimeEntity;
 import com.surbear.member.model.Age;
 import com.surbear.member.model.Gender;
-import com.surbear.member.model.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

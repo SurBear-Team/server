@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "servey")
+@Table(name = "serveys")
 public class ServeyEntity extends BaseTimeEntity {
 
     @Id
@@ -46,6 +46,5 @@ public class ServeyEntity extends BaseTimeEntity {
     @Builder.Default
     @Column
     boolean deleted = false;
-
 
 }

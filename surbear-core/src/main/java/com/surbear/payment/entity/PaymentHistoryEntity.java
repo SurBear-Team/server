@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "payment_historys")
+@Table(name = "payments_histories")
 public class PaymentHistoryEntity extends BaseTimeEntity {
 
     @Id
@@ -31,4 +31,5 @@ public class PaymentHistoryEntity extends BaseTimeEntity {
     @Builder.Default
     @Column
     boolean deleted = false;
+
 }
