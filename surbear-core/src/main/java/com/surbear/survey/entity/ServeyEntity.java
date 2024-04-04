@@ -1,8 +1,7 @@
 package com.surbear.survey.entity;
 
-import com.surbear.member.entity.MemberEntity;
-import com.surbear.member.model.Role;
-import com.surbear.survey.model.SituationType;
+import com.surbear.common.entity.BaseTimeEntity;
+import com.surbear.survey.model.OngoingType;
 import com.surbear.survey.model.SurveyType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,12 +15,24 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "servey")
-public class ServeyEntity {
+public class ServeyEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "servey_id")
     Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private OngoingType ongoingType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private SurveyType surveyType;
+
+    @Column
+    String serveyAuthorId;
 
     @Column
     String title;
@@ -30,23 +41,11 @@ public class ServeyEntity {
     String description;
 
     @Column
-    Integer paymentPoint;
+    Integer point;
 
+    @Builder.Default
     @Column
-    Boolean deleted;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private SituationType situationType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private SurveyType surveyType;
-
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private MemberEntity surveyAuthor;
-
+    boolean deleted = false;
 
 
 }
