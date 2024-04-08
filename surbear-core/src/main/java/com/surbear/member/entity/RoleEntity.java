@@ -24,8 +24,8 @@ public class RoleEntity extends BaseTimeEntity {
     @Column
     Long memberId;
 
+    @Column
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
     private Role role;
 
     @Builder.Default

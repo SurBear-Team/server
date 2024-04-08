@@ -21,12 +21,12 @@ public class MemberEntity extends BaseTimeEntity {
     @EqualsAndHashCode.Include
     Long id;
 
+    @Column
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
     private Age age;
 
+    @Column
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
     private Gender gender;
 
     @Column

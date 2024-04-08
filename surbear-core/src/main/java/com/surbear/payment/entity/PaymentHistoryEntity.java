@@ -21,7 +21,7 @@ public class PaymentHistoryEntity extends BaseTimeEntity {
     Long id;
 
     @Column
-    Long memeberId;
+    Long memberId;
 
     @Column
     String paymentItem;
