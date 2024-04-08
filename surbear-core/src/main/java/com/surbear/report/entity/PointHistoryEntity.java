@@ -30,7 +30,7 @@ public class PointHistoryEntity extends BaseTimeEntity {
     String description;
 
     @Column
-    Long paidPoint;
+    Integer paidPoint;
 
     @Builder.Default
     @Column

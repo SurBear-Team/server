@@ -28,6 +28,7 @@ public class ServeyQuestionOptionEntity extends BaseTimeEntity {
     String answer;
 
     @Column
+    @Enumerated(EnumType.STRING)
     QuestionType questionType;
 
     @Builder.Default

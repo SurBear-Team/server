@@ -24,8 +24,8 @@ public class ServeyQuestionEntity extends BaseTimeEntity {
     @Column
     Long serveyId;
 
+    @Column
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
     private QuestionType questionType;
 
     @Column
