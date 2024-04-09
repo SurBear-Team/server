@@ -24,6 +24,7 @@ bin/
 *.iml
 *.ipr
 *.yml
+*.log
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
