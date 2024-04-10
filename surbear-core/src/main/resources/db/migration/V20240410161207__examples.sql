@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS examples
+(
+    id   BIGINT AUTO_INCREMENT NOT NULL COMMENT 'ID',
+    name VARCHAR(255)          NOT NULL COMMENT '예제이름',
+    PRIMARY KEY (id)
+);
