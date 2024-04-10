@@ -4,7 +4,8 @@
     <timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
     <property name="LOG_PATTERN"
               value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] [%thread] %-5level [%C.%M:%L] - %msg%n"/>
-
+    <property name="LOG_PATTERN_CONSOLE"
+              value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
     <springProfile name="local,test">
         <include resource="console-appender.xml"/>
 
