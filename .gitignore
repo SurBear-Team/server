@@ -23,7 +23,10 @@ bin/
 *.iws
 *.iml
 *.ipr
-*.yml
+./surbear-api/src/main/resources
+application*.yml
+docker-compose.yml
+
 *.log
 out/
 !**/src/main/**/out/
