@@ -64,9 +64,9 @@ jobs:
           script: |
             cd /home/ec2-user/surbear/dev
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker stop develop-server
-            docker rm develop-server
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}
+            docker stop develop-server || true
+            docker rm develop-server || true
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }} || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}:latest
             docker-compose up -d
             docker image prune -f
