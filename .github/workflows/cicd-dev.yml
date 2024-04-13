@@ -64,9 +64,17 @@ jobs:
           script: |
             cd /home/ec2-user/surbear/dev
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker stop develop-server || true
-            docker rm develop-server || true
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }} || true
+            # Check if the container exists before trying to stop and remove it
+            if docker ps -a | grep -q 'develop-server'; then
+            docker stop develop-server
+            docker rm develop-server
+            fi
+  
+            # Check if the image exists before trying to remove it
+            if docker images | grep -q '${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}'; then
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}
+            fi
+
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}:latest
             docker-compose up -d
             docker image prune -f
