@@ -76,6 +76,7 @@ jobs:
             docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}
             fi
 
+
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}:latest
             docker-compose up -d
             docker image prune -f
