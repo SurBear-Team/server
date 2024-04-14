@@ -66,7 +66,7 @@ jobs:
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker stop surbear-develop-server
             docker rm surbear-develop-server
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_PROD_REPO }}:latest
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_DEV_REPO }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_DEV_REPO }}:latest
             docker-compose up -d
             docker image prune -f
