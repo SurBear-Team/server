@@ -1,4 +1,4 @@
-package com.surbear.survey.model;
+package com.surbear.survey.constants;
 
 import lombok.RequiredArgsConstructor;
 

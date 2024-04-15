@@ -1,4 +1,4 @@
-package com.surbear.member.model;
+package com.surbear.member.constant;
 
 public enum Age {
     UNDER_TWENTY("1~19"),

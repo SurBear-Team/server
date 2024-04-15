@@ -1,4 +1,4 @@
-package com.surbear.member.model;
+package com.surbear.member.constant;
 
 import lombok.RequiredArgsConstructor;
 
