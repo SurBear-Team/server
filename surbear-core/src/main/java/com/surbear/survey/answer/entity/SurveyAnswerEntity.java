@@ -12,8 +12,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "serveys_answers")
-public class ServeyAnswerEntity extends BaseTimeEntity {
+@Table(name = "surveys_answers")
+public class SurveyAnswerEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,13 @@ public class ServeyAnswerEntity extends BaseTimeEntity {
     Long id;
 
     @Column
-    Long respondentId;
+    Long memberId;
 
     @Column
-    Long serveyId;
+    Long surveyId;
+
+    @Column
+    Long surveyAnswerId;
 
     @Builder.Default
     @Column

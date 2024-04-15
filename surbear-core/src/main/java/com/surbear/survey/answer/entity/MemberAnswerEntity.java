@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "members_answers")
+@Table(name = "member_answers")
 public class MemberAnswerEntity extends BaseTimeEntity {
 
     @Id
@@ -22,6 +22,9 @@ public class MemberAnswerEntity extends BaseTimeEntity {
 
     @Column
     Long surveyAnswerId;
+
+    @Column
+    Long surveyQuestionId;
 
     @Column
     String answer;

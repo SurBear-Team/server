@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS questions
 (
     id            BIGINT AUTO_INCREMENT                         NOT NULL COMMENT 'ID',
-    servey_id     BIGINT                                        NOT NULL COMMENT '설문 ID',
+    survey_id     BIGINT                                        NOT NULL COMMENT '설문 ID',
     question_type ENUM ('MULTIPLE_CHOICE','SUBJECTIVE','RATIO') NOT NULL COMMENT '질문 타입',
     content       VARCHAR(255)                                  NOT NULL COMMENT '질문 내용',
     max_text      INT                                           NOT NULL COMMENT '최대 텍스트 제한',

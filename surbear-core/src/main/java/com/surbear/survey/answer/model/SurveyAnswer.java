@@ -3,10 +3,11 @@ package com.surbear.survey.answer.model;
 import lombok.Builder;
 
 @Builder
-public record ServeyAnswer(
+public record SurveyAnswer(
         Long id,
-        Long respondentId,
-        Long serveyId,
+        Long memberId,
+        Long surveyId,
+        Long surveyAnswerId,
         boolean deleted
 ) {
 }

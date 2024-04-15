@@ -1,8 +1,7 @@
 package com.surbear.survey.question.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
-import com.surbear.survey.constants.OngoingType;
-import com.surbear.survey.constants.SurveyType;
+import com.surbear.survey.constants.QuestionType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,33 +13,23 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "serveys")
-public class ServeyEntity extends BaseTimeEntity {
+@Table(name = "questions_options")
+public class SurveyQuestionOptionEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     Long id;
 
+    @Column
+    Long questionId;
+
+    @Column
+    String answer;
+
+    @Column
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private OngoingType ongoingType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private SurveyType surveyType;
-
-    @Column
-    Long serveyAuthorId;
-
-    @Column
-    String title;
-
-    @Column
-    String description;
-
-    @Column
-    Integer point;
+    QuestionType questionType;
 
     @Builder.Default
     @Column

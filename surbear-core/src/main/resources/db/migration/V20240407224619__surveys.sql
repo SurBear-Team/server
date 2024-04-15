@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS serveys
+CREATE TABLE IF NOT EXISTS surveys
 (
     id               BIGINT AUTO_INCREMENT                            NOT NULL COMMENT 'ID',
-    servey_author_id BIGINT                                           NOT NULL COMMENT '설문 생성자 ID',
+    survey_author_id BIGINT                                           NOT NULL COMMENT '설문 생성자 ID',
     ongoing_type     ENUM ('PROGRESS','PAUSE','CLOSE','MODIFICATION') NOT NULL COMMENT '진행중 여부',
     survey_type      ENUM ('EDUCATION','ETC')                         NOT NULL COMMENT '설문 여부',
     point            INT                                              NOT NULL COMMENT '제공하는 포인트',

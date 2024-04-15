@@ -13,8 +13,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "questions_options")
-public class ServeyQuestionOptionEntity extends BaseTimeEntity {
+@Table(name = "questions")
+public class SurveyQuestionEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +22,23 @@ public class ServeyQuestionOptionEntity extends BaseTimeEntity {
     Long id;
 
     @Column
-    Long questionId;
-
-    @Column
-    String answer;
+    Long surveyId;
 
     @Column
     @Enumerated(EnumType.STRING)
-    QuestionType questionType;
+    private QuestionType questionType;
+
+    @Column
+    String content;
+
+    @Column
+    Boolean required;
+
+    @Column
+    Integer page;
+
+    @Column
+    Integer maxText;
 
     @Builder.Default
     @Column
