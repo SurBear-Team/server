@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS questions
+CREATE TABLE IF NOT EXISTS survey_questions
 (
     id            BIGINT AUTO_INCREMENT                         NOT NULL COMMENT 'ID',
     survey_id     BIGINT                                        NOT NULL COMMENT '설문 ID',
