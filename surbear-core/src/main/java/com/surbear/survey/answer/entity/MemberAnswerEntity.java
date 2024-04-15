@@ -1,4 +1,4 @@
-package com.surbear.survey.entity.answer;
+package com.surbear.survey.answer.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -12,8 +12,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "serveys_answers")
-public class ServeyAnswerEntity extends BaseTimeEntity {
+@Table(name = "members_answers")
+public class MemberAnswerEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class ServeyAnswerEntity extends BaseTimeEntity {
     Long id;
 
     @Column
-    Long respondentId;
+    Long surveyAnswerId;
 
     @Column
-    Long serveyId;
+    String answer;
 
     @Builder.Default
     @Column

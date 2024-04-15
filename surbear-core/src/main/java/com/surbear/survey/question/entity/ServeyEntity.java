@@ -1,8 +1,8 @@
-package com.surbear.survey.entity;
+package com.surbear.survey.question.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
-import com.surbear.survey.model.OngoingType;
-import com.surbear.survey.model.SurveyType;
+import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.SurveyType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
