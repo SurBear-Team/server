@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "questions_options")
+@Table(name = "survey_question_options")
 public class SurveyQuestionOptionEntity extends BaseTimeEntity {
 
     @Id
