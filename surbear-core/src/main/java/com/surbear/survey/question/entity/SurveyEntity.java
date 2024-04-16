@@ -42,6 +42,12 @@ public class SurveyEntity extends BaseTimeEntity {
     @Column
     Integer point;
 
+    @Column
+    Integer maximumNumberOfPeople;
+
+    @Column
+    boolean openType;
+
     @Builder.Default
     @Column
     boolean deleted = false;
