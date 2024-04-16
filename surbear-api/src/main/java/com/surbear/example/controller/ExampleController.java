@@ -6,6 +6,7 @@ import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.mock.example.model.Example;
 import com.surbear.example.service.ExampleService;
 import com.surbear.mock.example.model.SurveyTestResponse;
+import com.surbear.survey.model.OngoingType;
 import com.surbear.survey.model.SurveyType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,35 +50,46 @@ public class ExampleController {
         List<SurveyTestResponse> returnList = new ArrayList<>();
         returnList.add(SurveyTestResponse.builder()
                 .id(1L)
-                .author("테스트 멤버")
+                .surveyAuthorId("테스트 멤버")
                 .point(20)
                 .title("테스트 입니다")
+                .description("123213123")
+                .maximumNumberOfPeople(24)
                 .deadLine(Instant.ofEpochSecond(2024 - 04 - 12))
-                .type(SurveyType.EDUCATION)
+                .openType(false)
+                .ongoingType(OngoingType.CLOSE)
+                .surveyType(SurveyType.EDUCATION)
+                .deleted(false)
                 .build());
         returnList.add(SurveyTestResponse.builder()
                 .id(2L)
-                .author("아주세나")
+                .surveyAuthorId("아주세나")
                 .point(30)
                 .title("철권을 좋아하는 의문의 29살 노인")
+                .description("아")
+                .maximumNumberOfPeople(23)
                 .deadLine(Instant.ofEpochSecond(2024 - 04 - 12))
-                .type(SurveyType.ETC)
+                .openType(false)
+                .ongoingType(OngoingType.PROGRESS)
+                .surveyType(SurveyType.ETC)
+                .deleted(false)
                 .build());
         returnList.add(SurveyTestResponse.builder()
                 .id(3L)
-                .author("조찬혁")
+                .surveyAuthorId("조찬혁")
                 .point(10)
                 .title("잘생긴 동네형")
+                .description("아아")
+                .maximumNumberOfPeople(1)
                 .deadLine(Instant.ofEpochSecond(2024 - 04 - 12))
-                .type(SurveyType.EDUCATION)
+                .openType(true)
+                .ongoingType(OngoingType.MODIFICATION)
+                .surveyType(SurveyType.EDUCATION)
+                .deleted(false)
                 .build());
 
         return returnList;
     }
 
-    @Operation(summary = "단일 설문 자세히 보기", description = "단일 설문 자세히 보기")
-    @GetMapping("/error/500")
-    public  internalServerError() {
-        throw new ProcessErrorCodeException(BasicErrorCode.INTERNAL_SERVER_ERROR);
-    }
+
 }
