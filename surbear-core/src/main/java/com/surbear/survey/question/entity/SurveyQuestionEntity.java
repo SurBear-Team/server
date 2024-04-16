@@ -38,6 +38,9 @@ public class SurveyQuestionEntity extends BaseTimeEntity {
     Integer page;
 
     @Column
+    Integer questionOrder;
+
+    @Column
     Integer maxText;
 
     @Builder.Default

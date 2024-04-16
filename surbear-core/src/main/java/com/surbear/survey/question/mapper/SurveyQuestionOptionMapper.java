@@ -5,7 +5,7 @@ import com.surbear.survey.question.model.SurveyQuestionOption;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface ServeyQuestionOptionMapper {
+public interface SurveyQuestionOptionMapper {
     SurveyQuestionOptionEntity toEntity(SurveyQuestionOption model);
 
     SurveyQuestionOption toModel(SurveyQuestionOptionEntity entity);

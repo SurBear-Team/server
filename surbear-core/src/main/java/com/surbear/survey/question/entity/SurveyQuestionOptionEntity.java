@@ -27,10 +27,6 @@ public class SurveyQuestionOptionEntity extends BaseTimeEntity {
     @Column
     String answer;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    QuestionType questionType;
-
     @Builder.Default
     @Column
     boolean deleted = false;
