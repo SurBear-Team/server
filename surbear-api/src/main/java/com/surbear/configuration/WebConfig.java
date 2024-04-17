@@ -1,4 +1,4 @@
-package com.configuration;
+package com.surbear.configuration;
 
 
 import org.springframework.context.annotation.Configuration;
