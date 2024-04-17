@@ -1,15 +1,13 @@
 package com.surbear.survey.question.service;
 
-import com.surbear.mock.example.entity.example.ExampleEntity;
-import com.surbear.mock.example.model.Example;
-import com.surbear.survey.question.dto.AnswersRequest;
+import com.surbear.survey.dto.AnswersRequest;
+import com.surbear.survey.dto.CreateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.entity.SurveyQuestionOptionEntity;
 import com.surbear.survey.question.mapper.SurveyMapper;
 import com.surbear.survey.question.mapper.SurveyQuestionMapper;
 import com.surbear.survey.question.mapper.SurveyQuestionOptionMapper;
-import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.model.SurveyQuestion;
 import com.surbear.survey.question.model.SurveyQuestionOption;
 import com.surbear.survey.question.repository.SurveyQuestionOptionRepository;
@@ -18,8 +16,6 @@ import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -35,9 +31,18 @@ public class SurveyQuestionService {
 
 
     @Transactional
-    public Long createSurvey(Survey survey) {
+    public Long createSurvey(CreateSurveyRequest req) {
         //TODO 지급 포인트 로직
-        SurveyEntity surveyEntity = surveyMapper.toEntity(survey);
+        //TODO 순서 로직
+        SurveyEntity surveyEntity = SurveyEntity.builder()
+                .surveyAuthorId(req.surveyAuthorId())
+                .maximumNumberOfPeople(req.maximumNumberOfPeople())
+                .description(req.description())
+                .title(req.title())
+                .openType(req.openType())
+                .surveyType(req.surveyType())
+                .deadLine(req.deadLine())
+                .build();
         return surveyRepository.save(surveyEntity).getId();
     }
 
@@ -59,7 +64,6 @@ public class SurveyQuestionService {
                     .questionId(questionId)
                     .answer(answer)
                     .build();
-
             SurveyQuestionOptionEntity entity = surveyQuestionOptionMapper.toEntity(surveyQuestionOption);
             surveyQuestionOptionRepository.save(entity);
         }
