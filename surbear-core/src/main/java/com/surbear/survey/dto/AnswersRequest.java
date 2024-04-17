@@ -1,4 +1,4 @@
-package com.surbear.survey.question.dto;
+package com.surbear.survey.dto;
 
 import java.util.List;
 
