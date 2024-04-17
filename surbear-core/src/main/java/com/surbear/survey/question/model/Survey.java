@@ -4,6 +4,8 @@ import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.SurveyType;
 import lombok.Builder;
 
+import java.time.Instant;
+
 @Builder
 public record Survey(
         Long id,
@@ -15,6 +17,8 @@ public record Survey(
         String description,
         Integer point,
         boolean openType,
-        boolean deleted
+        boolean deleted,
+        Instant deadLine
+
 ) {
 }
