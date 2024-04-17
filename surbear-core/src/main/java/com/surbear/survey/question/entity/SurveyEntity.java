@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.Instant;
+
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,9 +24,10 @@ public class SurveyEntity extends BaseTimeEntity {
     @EqualsAndHashCode.Include
     Long id;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private OngoingType ongoingType;
+    private OngoingType ongoingType = OngoingType.PAUSE;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
@@ -39,8 +42,9 @@ public class SurveyEntity extends BaseTimeEntity {
     @Column
     String description;
 
+    @Builder.Default
     @Column
-    Integer point;
+    Integer point= 999;
 
     @Column
     Integer maximumNumberOfPeople;
@@ -51,5 +55,8 @@ public class SurveyEntity extends BaseTimeEntity {
     @Builder.Default
     @Column
     boolean deleted = false;
+
+    @Column
+    Instant deadLine;
 
 }
