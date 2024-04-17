@@ -1,7 +1,7 @@
 package com.surbear.mock.example.model;
 
-import com.surbear.survey.model.OngoingType;
-import com.surbear.survey.model.SurveyType;
+import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.SurveyType;
 import lombok.Builder;
 
 import java.time.Instant;
