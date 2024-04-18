@@ -29,6 +29,6 @@ public class SurveyQuestionController {
     @Operation(summary = "새 질문 만들기", description = "새 질문 만들기에 해당하는 API, 바디에 DTO는 두개의 객체타입이니 확인하자")
     @PostMapping("/question")
     public Long createQuestion(@RequestBody SurveyQuestionRequest req) {
-        return service.createQuestion(req.surveyQuestion(), req.answersRequest());
+        return service.createQuestion(req.surveyQuestion(), req.surveyQuestionOptions());
     }
 }

@@ -1,8 +1,10 @@
 package com.surbear.survey.question.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.SurveyType;
 import lombok.Builder;
+import org.springframework.data.repository.query.Param;
 
 import java.time.Instant;
 
