@@ -1,8 +1,7 @@
-package com.surbear.member.entity;
+package com.surbear.survey.question.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
-import com.surbear.member.constant.Age;
-import com.surbear.member.constant.Gender;
+import com.surbear.survey.constants.QuestionType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,38 +13,26 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "members")
-public class MemberEntity extends BaseTimeEntity {
+@Table(name = "survey_question_options")
+public class SurveyQuestionOptionEntity extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     Long id;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private Age age;
+    Long questionId;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
-    @Column
-    String userId;
-
-    @Column
-    String password;
-
-    @Column
-    String email;
-
-    @Column
-    Integer point;
-
-    @Column
-    String nickname;
+    String answer;
 
     @Builder.Default
     @Column
     boolean deleted = false;
+
+    public void delete() {
+        deleted = true;
+    }
 
 }

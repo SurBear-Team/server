@@ -1,7 +1,7 @@
 package com.surbear.member.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
-import com.surbear.member.model.Role;
+import com.surbear.member.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "serveys_reports")
+@Table(name = "surveys_reports")
 public class ServeyReportEntity extends BaseTimeEntity {
 
     @Id
@@ -24,7 +24,7 @@ public class ServeyReportEntity extends BaseTimeEntity {
     Long reporterId;
 
     @Column
-    Long serveyId;
+    Long surveyId;
 
     @Column
     String reason;
