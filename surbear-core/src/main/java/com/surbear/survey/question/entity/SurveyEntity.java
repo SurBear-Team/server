@@ -44,7 +44,7 @@ public class SurveyEntity extends BaseTimeEntity {
 
     @Builder.Default
     @Column
-    Integer point= 999;
+    Integer point = 999;
 
     @Column
     Integer maximumNumberOfPeople;
@@ -58,5 +58,9 @@ public class SurveyEntity extends BaseTimeEntity {
 
     @Column
     Instant deadLine;
+
+    public void delete() {
+        deleted = true;
+    }
 
 }

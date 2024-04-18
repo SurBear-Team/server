@@ -47,4 +47,8 @@ public class SurveyQuestionEntity extends BaseTimeEntity {
     @Column
     boolean deleted = false;
 
+
+    public void delete() {
+        deleted = true;
+    }
 }
