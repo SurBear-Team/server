@@ -32,7 +32,7 @@ public class SurveyManagementController {
     }
 
     @Operation(summary = "내설문 단일 업데이트", description = "사용자 id와 입력하게 되는 수정값 기반 업데이트")
-    @PatchMapping("{surveyId}")
+    @PutMapping("{surveyId}")
     public int updateSurvey(@RequestBody UpdateSurveyRequest req, @PathVariable Long surveyId) {
         return service.updateSurvey(req, surveyId);
     }

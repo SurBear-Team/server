@@ -6,12 +6,16 @@ import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
 
+    @Transactional
+    @Modifying
     @Query("""
             UPDATE SurveyEntity s
             SET s.title = :#{#dto.title},
