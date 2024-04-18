@@ -8,7 +8,7 @@ import java.util.List;
 
 @Builder
 public record SurveyQuestionRequest(
-        List<SurveyQuestionOption> surveyQuestionOptions,
+        List<String> answers,
         SurveyQuestion surveyQuestion
 ) {
 }

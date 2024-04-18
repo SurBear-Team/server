@@ -53,7 +53,11 @@ public class SurveyPrecedingService {
     }
 
     @Transactional
-    public void createSurveyQuestionOption(SurveyQuestionOption surveyQuestionOption) {
+    public void createSurveyQuestionOption(String answer, Long questionId) {
+        SurveyQuestionOption surveyQuestionOption = SurveyQuestionOption.builder()
+                .questionId(questionId)
+                .answer(answer)
+                .build();
         SurveyQuestionOptionEntity newEntity = surveyQuestionOptionMapper.toEntity(surveyQuestionOption);
 
         surveyQuestionOptionRepository.save(newEntity);
@@ -69,6 +73,15 @@ public class SurveyPrecedingService {
         return surveyRepository.findBySurveyAuthorId(surveyAuthorId);
     }
 
+    public SurveyQuestionEntity getSurveyQuestion(Long surveyId){
+        return surveyQuestionRepository.findBySurveyId(surveyId);
+    }
+
+    public SurveyQuestionEntity getSurveyQuestionDeletedIsFalse(Long surveyId){
+        return surveyQuestionRepository.findFirstBySurveyIdAndDeletedIsFalse(surveyId);
+    }
+
+    @Transactional
     public int updateSurvey(UpdateSurveyRequest req, Long surveyId) {
         return surveyRepository.updateSurvey(req, surveyId);
     }
@@ -79,6 +92,11 @@ public class SurveyPrecedingService {
         SurveyEntity entity = surveyRepository.findById(surveyId)
                 .orElseThrow(RuntimeException::new);
 
-        surveyRepository.delete(entity);
+        entity.delete();
+    }
+
+    @Transactional
+    public void deleteSurveyQuestionOptionList(Long surveyQuestionId) {
+        surveyQuestionOptionRepository.markDeletedByQuestionId(surveyQuestionId);
     }
 }

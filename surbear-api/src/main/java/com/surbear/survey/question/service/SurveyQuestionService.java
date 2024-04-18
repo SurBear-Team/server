@@ -36,9 +36,9 @@ public class SurveyQuestionService {
     }
 
     @Transactional
-    public Long createQuestion(SurveyQuestion surveyQuestion, List<SurveyQuestionOption> list) {
+    public Long createQuestion(SurveyQuestion surveyQuestion, List<String> answers) {
         Long questionId = generateQuestion(surveyQuestion);
-        generateQuestionOption(list);
+        generateQuestionOption(answers, questionId);
         return questionId;
     }
 
@@ -46,9 +46,9 @@ public class SurveyQuestionService {
         return precedingService.createSurveyQuestion(surveyQuestion);
     }
 
-    private void generateQuestionOption(List<SurveyQuestionOption> list) {
-        for (SurveyQuestionOption answer : list) {
-            precedingService.createSurveyQuestionOption(answer);
+    private void generateQuestionOption(List<String> list, Long questionId) {
+        for (String answer : list) {
+            precedingService.createSurveyQuestionOption(answer, questionId);
         }
     }
 }
