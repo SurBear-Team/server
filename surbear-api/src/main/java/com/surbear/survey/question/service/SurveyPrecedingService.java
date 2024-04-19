@@ -2,6 +2,7 @@ package com.surbear.survey.question.service;
 
 
 import com.surbear.survey.dto.CreateSurveyRequest;
+import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
@@ -16,8 +17,12 @@ import com.surbear.survey.question.repository.SurveyQuestionOptionRepository;
 import com.surbear.survey.question.repository.SurveyQuestionRepository;
 import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -73,17 +78,27 @@ public class SurveyPrecedingService {
         return surveyRepository.findBySurveyAuthorId(surveyAuthorId);
     }
 
-    public SurveyQuestionEntity getSurveyQuestion(Long surveyId){
+    public SurveyQuestionEntity getSurveyQuestion(Long surveyId) {
         return surveyQuestionRepository.findBySurveyId(surveyId);
     }
 
-    public SurveyQuestionEntity getSurveyQuestionDeletedIsFalse(Long surveyId){
+    public SurveyQuestionEntity getSurveyQuestionDeletedIsFalse(Long surveyId) {
         return surveyQuestionRepository.findFirstBySurveyIdAndDeletedIsFalse(surveyId);
+    }
+
+    public List<Survey> getSurveyByCreatedAt(int page, int number){
+        Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "createdAt"));
+        return surveyRepository.findByDeletedFalseOrderByCreatedAtDesc(pageable);
     }
 
     @Transactional
     public int updateSurvey(UpdateSurveyRequest req, Long surveyId) {
         return surveyRepository.updateSurvey(req, surveyId);
+    }
+
+    @Transactional
+    public void updateSurveyOnGoingType(UpdateSurveyOngoingTypeRequest req) {
+        surveyRepository.updateOngoingTypeById(req.id(), req.type());
     }
 
     @Transactional
