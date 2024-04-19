@@ -1,12 +1,14 @@
 package com.surbear.survey.question.controller;
 
 
+import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.service.SurveyManagementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,15 +33,30 @@ public class SurveyManagementController {
         return service.getSurvey(surveyId);
     }
 
+    @Operation(summary = "설문 전체 조회 최신순", description = "매개변수로 요청하는 page번호와, 가져올 설문갯수")
+    @GetMapping("/{page}/{number}")
+    public List<Survey> getSurveyByCreatedAt(@PathVariable int page, @PathVariable int number) {
+        return service.getSurveyByCreatedAt(page, number);
+    }
+
+
     @Operation(summary = "내설문 단일 업데이트", description = "사용자 id와 입력하게 되는 수정값 기반 업데이트")
     @PutMapping("{surveyId}")
     public int updateSurvey(@RequestBody UpdateSurveyRequest req, @PathVariable Long surveyId) {
         return service.updateSurvey(req, surveyId);
     }
 
+    @Operation(summary = "내설문 ongoingType 변경", description = "사용자 id기반 으로 검색을 수행후, 입력한 ongoingType으로 상태변경")
+    @PutMapping("ongoing-type/{surveyId}")
+    public ResponseEntity<Void> updateSurveyOnGoingType(@RequestBody UpdateSurveyOngoingTypeRequest req) {
+        service.updateSurveyOnGoingType(req);
+        return ResponseEntity.ok().build();
+    }
+
     @Operation(summary = "설문 단일 삭제", description = "설문 id를 기반으로 단일 삭제")
     @DeleteMapping("{surveyId}")
-    public void deleteSurvey(@PathVariable Long surveyId) {
+    public ResponseEntity<Void> deleteSurvey(@PathVariable Long surveyId) {
         service.deleteSurvey(surveyId);
+        return ResponseEntity.ok().build();
     }
 }

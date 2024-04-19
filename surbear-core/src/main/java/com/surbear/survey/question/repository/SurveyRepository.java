@@ -1,10 +1,12 @@
 package com.surbear.survey.question.repository;
 
+import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.dto.GetSurveyListResponse;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +30,14 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
             """)
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE SurveyEntity s SET s.ongoingType = :ongoingType WHERE s.id = :id")
+    void updateOngoingTypeById(Long id, OngoingType ongoingType);
+
     List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
+
+    List<Survey> findByDeletedFalseOrderByCreatedAtDesc(Pageable pageable);
+
 
 }

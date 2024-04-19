@@ -1,5 +1,6 @@
 package com.surbear.survey.question.service;
 
+import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
@@ -25,9 +26,18 @@ public class SurveyManagementService {
         return precedingService.getSurveyByAuthorId(surveyAuthorId);
     }
 
+    public List<Survey> getSurveyByCreatedAt(int page, int number){
+        return precedingService.getSurveyByCreatedAt(page, number);
+    }
+
     @Transactional
     public int updateSurvey(UpdateSurveyRequest req, Long surveyId) {
         return precedingService.updateSurvey(req, surveyId);
+    }
+
+    @Transactional
+    public void updateSurveyOnGoingType(UpdateSurveyOngoingTypeRequest req) {
+        precedingService.updateSurveyOnGoingType(req);
     }
 
     @Transactional
