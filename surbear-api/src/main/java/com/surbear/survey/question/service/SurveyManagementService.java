@@ -5,6 +5,7 @@ import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class SurveyManagementService {
         return precedingService.getSurveyByAuthorId(surveyAuthorId);
     }
 
-    public List<Survey> getSurveyByCreatedAt(int page, int number){
+    public Page<Survey> getSurveyByCreatedAt(int page, int number){
         return precedingService.getSurveyByCreatedAt(page, number);
     }
 

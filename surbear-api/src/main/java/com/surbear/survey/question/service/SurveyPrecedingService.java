@@ -17,6 +17,7 @@ import com.surbear.survey.question.repository.SurveyQuestionOptionRepository;
 import com.surbear.survey.question.repository.SurveyQuestionRepository;
 import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -86,7 +87,7 @@ public class SurveyPrecedingService {
         return surveyQuestionRepository.findFirstBySurveyIdAndDeletedIsFalse(surveyId);
     }
 
-    public List<Survey> getSurveyByCreatedAt(int page, int number){
+    public Page<Survey> getSurveyByCreatedAt(int page, int number){
         Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "createdAt"));
         return surveyRepository.findByDeletedFalseOrderByCreatedAtDesc(pageable);
     }
