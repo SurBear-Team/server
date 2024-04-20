@@ -18,6 +18,7 @@ public interface SurveyMapper {
     @Mapping(target = "ongoingType", ignore = true)
     @Mapping(target = "point", ignore = true)
     @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "startDate", ignore = true)
     SurveyEntity createSurveyRequestToEntity(CreateSurveyRequest model);
 
     SurveyEntity getSurveyListResponseToEntity(Survey model);

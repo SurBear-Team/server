@@ -31,11 +31,6 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
             """)
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE SurveyEntity s SET s.ongoingType = :ongoingType WHERE s.id = :id")
-    void updateOngoingTypeById(Long id, OngoingType ongoingType);
-
     List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
 
     Page<Survey> findByDeletedFalseAndOngoingTypeOrderByCreatedAtDesc(OngoingType ongoingType, Pageable pageable);

@@ -88,9 +88,9 @@ public class SurveyPrecedingService {
         return surveyQuestionRepository.findFirstBySurveyIdAndDeletedIsFalse(surveyId);
     }
 
-    public Page<Survey> getSurveyByCreatedAt(int page, int number){
+    public Page<Survey> getSurveyByCreatedAt(int page, int number) {
         Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "createdAt"));
-        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByCreatedAtDesc(OngoingType.PROGRESS,pageable);
+        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByCreatedAtDesc(OngoingType.PROGRESS, pageable);
     }
 
     @Transactional
@@ -100,7 +100,8 @@ public class SurveyPrecedingService {
 
     @Transactional
     public void updateSurveyOnGoingType(UpdateSurveyOngoingTypeRequest req) {
-        surveyRepository.updateOngoingTypeById(req.id(), req.type());
+        SurveyEntity newEntity = surveyRepository.findById(req.id()).get();
+        newEntity.setOngoingType(req.type());
     }
 
     @Transactional
