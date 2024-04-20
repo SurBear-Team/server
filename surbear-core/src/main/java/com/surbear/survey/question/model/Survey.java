@@ -22,7 +22,7 @@ public record Survey(
         boolean openType,
         boolean deleted,
         Instant deadLine,
-        Instant createdAt
+        Instant startDate
 
 ) {
 }
