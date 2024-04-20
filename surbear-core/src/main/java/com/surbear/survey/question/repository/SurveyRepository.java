@@ -38,7 +38,7 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
 
     List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
 
-    Page<Survey> findByDeletedFalseOrderByCreatedAtDesc(Pageable pageable);
+    Page<Survey> findByDeletedFalseAndOngoingTypeOrderByCreatedAtDesc(OngoingType ongoingType, Pageable pageable);
 
 
 }
