@@ -47,7 +47,7 @@ public class SurveyManagementController {
     }
 
     @Operation(summary = "내설문 ongoingType 변경", description = "사용자 id기반 으로 검색을 수행후, 입력한 ongoingType으로 상태변경")
-    @PutMapping("ongoing-type/{surveyId}")
+    @PutMapping("ongoing-type")
     public ResponseEntity<Void> updateSurveyOnGoingType(@RequestBody UpdateSurveyOngoingTypeRequest req) {
         service.updateSurveyOnGoingType(req);
         return ResponseEntity.ok().build();
