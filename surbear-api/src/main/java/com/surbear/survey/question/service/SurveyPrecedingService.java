@@ -95,7 +95,7 @@ public class SurveyPrecedingService {
 
     public Page<Survey> getSurveyByCreatedAt(int page, int number) {
         Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "startDate"));
-        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByCreatedAtDesc(OngoingType.PROGRESS, pageable);
+        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType.PROGRESS, pageable);
     }
 
     @Transactional
