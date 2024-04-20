@@ -59,8 +59,18 @@ public class SurveyEntity extends BaseTimeEntity {
     @Column
     Instant deadLine;
 
+    @Column(nullable = true)
+    private Instant startDate;
+
     public void delete() {
         deleted = true;
     }
 
+    public void setOngoingType(OngoingType type) {
+        this.ongoingType = type;
+        if (type == OngoingType.PROGRESS) {
+            this.startDate = Instant.now();
+        }
+
+    }
 }
