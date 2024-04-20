@@ -21,7 +21,8 @@ public record Survey(
         Integer point,
         boolean openType,
         boolean deleted,
-        Instant deadLine
+        Instant deadLine,
+        Instant createdAt
 
 ) {
 }

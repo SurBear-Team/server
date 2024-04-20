@@ -6,6 +6,7 @@ import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,7 +38,7 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
 
     List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
 
-    List<Survey> findByDeletedFalseOrderByCreatedAtDesc(Pageable pageable);
+    Page<Survey> findByDeletedFalseOrderByCreatedAtDesc(Pageable pageable);
 
 
 }
