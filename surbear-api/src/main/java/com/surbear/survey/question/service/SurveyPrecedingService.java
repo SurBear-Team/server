@@ -2,6 +2,7 @@ package com.surbear.survey.question.service;
 
 
 import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.CreateSurveyRequest;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
@@ -93,9 +94,12 @@ public class SurveyPrecedingService {
         return surveyRepository.updateSurvey(req, surveyId);
     }
 
-    public Page<Survey> getSurveyByCreatedAt(int page, int number) {
+    public Page<Survey> getSurveyByCreatedAt(int page, int number, SurveyType type) {
         Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "startDate"));
-        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType.PROGRESS, pageable);
+
+        return (type == SurveyType.ALL) ? surveyRepository.findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType.PROGRESS, pageable)
+                : surveyRepository.findByDeletedFalseAndOngoingTypeAndSurveyTypeOrderByStartDateDesc(OngoingType.PROGRESS, type, pageable);
+
     }
 
     @Transactional

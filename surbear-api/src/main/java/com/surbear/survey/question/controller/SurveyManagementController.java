@@ -1,6 +1,7 @@
 package com.surbear.survey.question.controller;
 
 
+import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.model.Survey;
@@ -36,8 +37,8 @@ public class SurveyManagementController {
 
     @Operation(summary = "설문 전체 조회 최신순", description = "매개변수로 요청하는 page번호와, 가져올 설문갯수")
     @GetMapping("/{page}/{number}")
-    public Page<Survey> getSurveyByCreatedAt(@PathVariable int page, @PathVariable int number) {
-        return service.getSurveyByCreatedAt(page, number);
+    public Page<Survey> getSurveyByCreatedAt(@PathVariable int page, @PathVariable int number, @RequestParam SurveyType type) {
+        return service.getSurveyByCreatedAt(page, number, type);
     }
 
 
