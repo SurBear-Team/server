@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class SurveyQuestionService {
 
-    private final SurveyPrecedingService precedingService;
+    private final QuestionPrecedingService precedingService;
 
 
     @Transactional

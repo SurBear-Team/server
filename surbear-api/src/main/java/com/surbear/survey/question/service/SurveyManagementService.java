@@ -1,34 +1,57 @@
 package com.surbear.survey.question.service;
 
+import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
+import com.surbear.survey.dto.QuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
+import com.surbear.survey.question.model.SurveyQuestion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class SurveyManagementService {
 
-    private final SurveyPrecedingService precedingService;
+    private final QuestionPrecedingService precedingService;
 
 
     public Survey getSurvey(Long surveyId) {
         return precedingService.getSurvey(surveyId);
     }
 
+    @Transactional
+    public List<QuestionAndOptions> createAllQuestionsAndOptions(Long surveyId) {
+        List<SurveyQuestion> surveyQuestionEntities = precedingService.getAllSurveyQuestionsId(surveyId);
+
+        return surveyQuestionEntities.stream()
+                .map(this::createQuestionAndOptions)
+                .collect(Collectors.toList());
+    }
+
+    private QuestionAndOptions createQuestionAndOptions(SurveyQuestion surveyQuestion) {
+        return (surveyQuestion.questionType() == QuestionType.MULTIPLE_CHOICE)
+                ?
+                QuestionAndOptions
+                        .ofObjectiveQuestion(surveyQuestion.content(),precedingService.findAnswersByQuestionId(surveyQuestion.id()))
+                :
+                QuestionAndOptions
+                        .ofSubjectiveQuestion(surveyQuestion.content());
+    }
+
     public List<Survey> getSurveyList(Long surveyAuthorId) {
         return precedingService.getSurveyByAuthorId(surveyAuthorId);
     }
 
-    public Page<Survey> getSurveyByCreatedAt(int page, int number, SurveyType type){
+    public Page<Survey> getSurveyByCreatedAt(int page, int number, SurveyType type) {
         return precedingService.getSurveyByCreatedAt(page, number, type);
     }
 

@@ -2,6 +2,7 @@ package com.surbear.survey.question.controller;
 
 
 import com.surbear.survey.constants.SurveyType;
+import com.surbear.survey.dto.QuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.model.Survey;
@@ -33,6 +34,12 @@ public class SurveyManagementController {
     @GetMapping("{surveyId}")
     public Survey getSurvey(@PathVariable Long surveyId) {
         return service.getSurvey(surveyId);
+    }
+
+    @Operation(summary = "질문과 그에 해당하는 선택지 조회", description = "설문 id기반 조회")
+    @GetMapping("option/{surveyId}")
+    public List<QuestionAndOptions> getQuestionAndAnswers(@PathVariable Long surveyId) {
+        return service.createAllQuestionsAndOptions(surveyId);
     }
 
     @Operation(summary = "설문 전체 조회 최신순", description = "매개변수로 요청하는 page번호와, 가져올 설문갯수")
