@@ -5,5 +5,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum QuestionType {
 
-    MULTIPLE_CHOICE, SUBJECTIVE, RATIO
+    MULTIPLE_CHOICE, SHORT_ANSWER, SLIDER
     }

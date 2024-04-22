@@ -1,6 +1,7 @@
 package com.surbear.survey.question.repository;
 
 import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.GetSurveyListResponse;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
@@ -34,6 +35,8 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
     List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
 
     Page<Survey> findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType ongoingType, Pageable pageable);
+
+    Page<Survey> findByDeletedFalseAndOngoingTypeAndSurveyTypeOrderByStartDateDesc(OngoingType ongoingType, SurveyType surveyType, Pageable pageable);
 
 
 }

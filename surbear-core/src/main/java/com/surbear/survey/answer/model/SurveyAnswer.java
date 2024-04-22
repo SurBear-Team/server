@@ -7,7 +7,6 @@ public record SurveyAnswer(
         Long id,
         Long memberId,
         Long surveyId,
-        Long surveyAnswerId,
         boolean deleted
 ) {
 }

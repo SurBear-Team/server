@@ -4,5 +4,5 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum SurveyType {
-    EDUCATION, ETC
+    ALL, SOCIAL, ECONOMY, LIFE, HOBBY, IT, CULTURE, EDUCATION, ETC
 }

@@ -2,7 +2,10 @@ package com.surbear.survey.question.service;
 
 
 import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.QuestionType;
+import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.CreateSurveyRequest;
+import com.surbear.survey.dto.QuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.entity.SurveyEntity;
@@ -27,11 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
-public class SurveyPrecedingService {
+public class QuestionPrecedingService {
 
     private final SurveyQuestionOptionRepository surveyQuestionOptionRepository;
     private final SurveyQuestionRepository surveyQuestionRepository;
@@ -40,6 +44,8 @@ public class SurveyPrecedingService {
     private final SurveyQuestionMapper surveyQuestionMapper;
     private final SurveyMapper surveyMapper;
 
+
+    //CREATE
 
     @Transactional
     public Long createSurvey(CreateSurveyRequest req) {
@@ -70,6 +76,9 @@ public class SurveyPrecedingService {
         surveyQuestionOptionRepository.save(newEntity);
     }
 
+    //GET
+
+
     public Survey getSurvey(Long surveyId) {
         return surveyRepository.findById(surveyId)
                 .map(surveyMapper::toModel)
@@ -84,18 +93,39 @@ public class SurveyPrecedingService {
         return surveyQuestionRepository.findBySurveyId(surveyId);
     }
 
+    public List<SurveyQuestion> getAllSurveyQuestionsId(Long surveyId){
+        return surveyQuestionRepository.findAllBySurveyId(surveyId);
+    }
+
+    public List<SurveyQuestionOption> getSurveyQuestionOption(Long surveyQuestionId) {
+        return surveyQuestionOptionRepository.findByQuestionId(surveyQuestionId);
+    }
+
+    public List<String> findAnswersByQuestionId(Long surveyQuestionId){
+        List<SurveyQuestionOption> options = getSurveyQuestionOption(surveyQuestionId);
+
+        return options.stream()
+                .map(SurveyQuestionOption::answer)
+                .collect(Collectors.toList());
+    }
+
     public SurveyQuestionEntity getSurveyQuestionDeletedIsFalse(Long surveyId) {
         return surveyQuestionRepository.findFirstBySurveyIdAndDeletedIsFalse(surveyId);
     }
 
+    public Page<Survey> getSurveyByCreatedAt(int page, int number, SurveyType type) {
+        Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "startDate"));
+
+        return (type == SurveyType.ALL) ? surveyRepository.findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType.PROGRESS, pageable)
+                : surveyRepository.findByDeletedFalseAndOngoingTypeAndSurveyTypeOrderByStartDateDesc(OngoingType.PROGRESS, type, pageable);
+
+    }
+
+    //UPDATE
+
     @Transactional
     public int updateSurvey(UpdateSurveyRequest req, Long surveyId) {
         return surveyRepository.updateSurvey(req, surveyId);
-    }
-
-    public Page<Survey> getSurveyByCreatedAt(int page, int number) {
-        Pageable pageable = PageRequest.of(page, number, Sort.by(Sort.Direction.DESC, "startDate"));
-        return surveyRepository.findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType.PROGRESS, pageable);
     }
 
     @Transactional
@@ -103,6 +133,8 @@ public class SurveyPrecedingService {
         SurveyEntity newEntity = surveyRepository.findById(req.id()).get();
         newEntity.setOngoingType(req.type());
     }
+
+    //DELETE
 
     @Transactional
     public void deleteSurvey(Long surveyId) {
