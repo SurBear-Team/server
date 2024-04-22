@@ -26,9 +26,6 @@ public class SurveyAnswerEntity extends BaseTimeEntity {
     @Column
     Long surveyId;
 
-    @Column
-    Long surveyAnswerId;
-
     @Builder.Default
     @Column
     boolean deleted = false;
