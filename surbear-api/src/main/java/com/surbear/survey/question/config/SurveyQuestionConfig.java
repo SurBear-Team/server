@@ -10,9 +10,9 @@ public class SurveyQuestionConfig {
     public GroupedOpenApi getSurveyQuestionApi() {
         return GroupedOpenApi.builder()
                 .group("SURVEY-QUESTION")
-                .pathsToMatch("/survey/question/**")
+                .pathsToMatch("/survey/**")
                 .pathsToExclude("")
-                .packagesToScan("com.surbear.survey.question.controller")
+                .packagesToScan("com.surbear.survey.question.controller","com.surbear.survey.answer.controller")
                 .build();
     }
 }
