@@ -1,0 +1,2 @@
+ALTER TABLE survey_questions
+    MODIFY COLUMN question_type ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'SLIDER') NOT NULL;
