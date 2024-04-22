@@ -134,6 +134,8 @@ public class QuestionPrecedingService {
         newEntity.setOngoingType(req.type());
     }
 
+    //DELETE
+
     @Transactional
     public void deleteSurvey(Long surveyId) {
 
@@ -142,8 +144,6 @@ public class QuestionPrecedingService {
 
         entity.delete();
     }
-
-    //DELETE
 
     @Transactional
     public void deleteSurveyQuestionOptionList(Long surveyQuestionId) {
