@@ -25,32 +25,60 @@ public class MemberService {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional
+    public Long signUp(Member member) {
+        boolean checkEmailDuplicate = isEmailDuplicate(member.email());
+
+        if (checkEmailDuplicate) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_ID);
+        }
+        return create(member);
+    }
 
     public LoginResponse login(LoginRequest req) {
-        Member newEntity = checkUserId(req.userId());
+        Member newEntity = checkUserIdExists(req.userId());
 
-        checkPassword(req.password(), newEntity.password());
+        checkPasswordExists(req.password(), newEntity.password());
         return LoginResponse.builder()
                 .accessToken(jwtTokenProvider.createToken(newEntity.id().toString()))
                 .build();
     }
 
-    private Member checkUserId(String userId){
-        if(repository.findByUserId(userId)==null){
-            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
-        }
-        return repository.findByUserId(userId);
+    public String findUserIdByEmail(String email) {
+        Member newMember = repository.findByEmail(email);
+        return newMember.userId();
     }
 
-    private void checkPassword(String passwordToVerify, String referencePassword) {
+    public
+
+
+    public void checkEmailExists(String email) {
+        Member member = repository.findByEmail(email);
+        if (member == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+    }
+
+    private Member checkUserIdExists(String userId) {
+        Member member = repository.findByUserId(userId);
+        if (member == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+        return member;
+    }
+
+    private void checkPasswordExists(String passwordToVerify, String referencePassword) {
         if (!passwordToVerify.equals(referencePassword)) {
             throw new ProcessErrorCodeException(BasicErrorCode.PASSWORD_MISMATCH);
         }
     }
 
+    private boolean isEmailDuplicate(String email) {
+        return repository.countByEmail(email) > 0;
+    }
 
-    @Transactional
-    public Long create(Member member) {
+
+    private Long create(Member member) {
         MemberEntity memberEntity = mapper.toEntity(member);
 
         MemberEntity savedEntity = repository.save(memberEntity);
