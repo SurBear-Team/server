@@ -12,6 +12,8 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     @Query("SELECT COUNT(u) FROM MemberEntity u WHERE u.email = :email AND u.deleted = false")
     Long countByEmail(String email);
 
+    Member findByUserIdAndEmail(String userId, String email);
+
     Member findByUserId(String userId);
 
     Member findByEmail(String email);

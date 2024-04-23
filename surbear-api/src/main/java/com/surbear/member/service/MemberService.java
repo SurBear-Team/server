@@ -49,8 +49,23 @@ public class MemberService {
         return newMember.userId();
     }
 
-    public
+    @Transactional
+    public void changePassword(String email, String newPassword) {
+        Member member = repository.findByEmail(email);
+        MemberEntity newEntity = mapper.toEntity(member);
 
+        newEntity.setPassword(newPassword);
+        repository.save(newEntity);
+    }
+
+
+    public void checkUserIdAndEmailExists(String userId, String email) {
+        Member member = repository.findByUserIdAndEmail(userId, email);
+        if (member == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+
+    }
 
     public void checkEmailExists(String email) {
         Member member = repository.findByEmail(email);
