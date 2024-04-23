@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface MemberMapper {
-    MemberEntity toEnitity(Member model);
+    MemberEntity toEntity(Member model);
 
     Member toModel(MemberEntity entity);
 }

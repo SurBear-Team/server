@@ -16,16 +16,23 @@ public enum BasicErrorCode implements ErrorCode {
     AUTHORIZATION_HEADER_NULL(HttpStatus.UNAUTHORIZED, "인증 헤더가 null입니다"),
     INVALID_TOKEN_PREFIX(HttpStatus.UNAUTHORIZED, "헤더 토큰 Prefix가 유효하지 않습니다."),
     NOT_AUTHENTICATION(HttpStatus.UNAUTHORIZED, "인증이 실패했습니다."),
+    AUTHENTICATION_FAILURE_ERROR(HttpStatus.UNAUTHORIZED, "사용자 요청 인증번호가 올바르지 않습니다"),
 
 
     // 403 FORBIDDEN
     BLOCKED_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다."),
+
     NOT_AUTHORIZATION(HttpStatus.FORBIDDEN, "인가가 실패했습니다."),
+
     ROLE_NOT_EXISTS(HttpStatus.FORBIDDEN, "권한이 존재하지 않습니다."),
 
 
     // 404 NOT_FOUND
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다."),
+    PASSWORD_MISMATCH(HttpStatus.NOT_FOUND, "패스워드가 틀렸습니다"),
+
+    // 408 REQUEST_TIMEOUT
+    TIME_LIMIT_EXCEEDED_ERROR(HttpStatus.REQUEST_TIMEOUT, "요청 시간이 지났습니다"),
 
 
     // 409 CONFLICT
