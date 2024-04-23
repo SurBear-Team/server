@@ -29,6 +29,7 @@ public enum BasicErrorCode implements ErrorCode {
 
     // 404 NOT_FOUND
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다."),
+    PASSWORD_MISMATCH(HttpStatus.NOT_FOUND, "패스워드가 틀렸습니다"),
 
     // 408 REQUEST_TIMEOUT
     TIME_LIMIT_EXCEEDED_ERROR(HttpStatus.REQUEST_TIMEOUT, "요청 시간이 지났습니다"),
