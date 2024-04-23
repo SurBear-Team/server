@@ -1,4 +1,4 @@
-package com.surbear.oauth.service;
+package com.surbear.mail.service;
 
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
