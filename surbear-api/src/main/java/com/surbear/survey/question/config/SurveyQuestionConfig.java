@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SurveyQuestionConfig {
     @Bean
-    public GroupedOpenApi getSurveyQuestionApi() {
+    public GroupedOpenApi getSurveyApi() {
         return GroupedOpenApi.builder()
-                .group("SURVEY-QUESTION")
+                .group("설문")
                 .pathsToMatch("/survey/**")
                 .pathsToExclude("")
                 .packagesToScan("com.surbear.survey.question.controller","com.surbear.survey.answer.controller")
