@@ -3,15 +3,12 @@ package com.surbear.member.service;
 import com.surbear.JwtTokenProvider;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
-import com.surbear.member.controller.dto.CertificationRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
 import com.surbear.member.entity.MemberEntity;
 import com.surbear.member.mapper.MemberMapper;
 import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
-import com.surbear.survey.question.model.Survey;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +24,6 @@ public class MemberService {
 
     @Transactional
     public Long signUp(Member member) {
-        boolean checkEmailDuplicate = isEmailDuplicate(member.email());
-
-        if (checkEmailDuplicate) {
-            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_ID);
-        }
         return create(member);
     }
 
@@ -50,28 +42,39 @@ public class MemberService {
     }
 
     @Transactional
-    public void changePassword(String email, String newPassword) {
+    public boolean changePassword(String email, String newPassword) {
         Member member = repository.findByEmail(email);
         MemberEntity newEntity = mapper.toEntity(member);
 
         newEntity.setPassword(newPassword);
         repository.save(newEntity);
+        return true;
     }
 
 
-    public void checkUserIdAndEmailExists(String userId, String email) {
+    public boolean checkUserIdAndEmailExists(String userId, String email) {
         Member member = repository.findByUserIdAndEmail(userId, email);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
-
+        return true;
     }
 
-    public void checkEmailExists(String email) {
+    public boolean checkEmailExists(String email) {
         Member member = repository.findByEmail(email);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
+        return true;
+    }
+
+    public boolean checkDuplicate(String type, String value){
+        return switch (type){
+            case "email" -> isEmailDuplicate(value);
+            case "userid" -> isUserIdDuplicate(value);
+            case "nickname" -> isNickNameDuplicate(value);
+            default -> throw new ProcessErrorCodeException(BasicErrorCode.INVALID_PARAMETER);
+        };
     }
 
     private Member checkUserIdExists(String userId) {
@@ -89,7 +92,29 @@ public class MemberService {
     }
 
     private boolean isEmailDuplicate(String email) {
-        return repository.countByEmail(email) > 0;
+        boolean duplicateFlag = repository.countByEmail(email) > 0;
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_EMAIL);
+        }
+        return true;
+    }
+
+    private boolean isUserIdDuplicate(String userId) {
+        boolean duplicateFlag = repository.countByUserId(userId) > 0;
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_USERID);
+        }
+        return true;
+    }
+
+
+    private boolean isNickNameDuplicate(String nickName) {
+        boolean duplicateFlag = repository.countByNickname(nickName) > 0;
+
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_NICKNAME);
+        }
+        return true;
     }
 
 

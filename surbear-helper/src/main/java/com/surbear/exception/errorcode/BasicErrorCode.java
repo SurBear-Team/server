@@ -21,9 +21,7 @@ public enum BasicErrorCode implements ErrorCode {
 
     // 403 FORBIDDEN
     BLOCKED_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다."),
-
     NOT_AUTHORIZATION(HttpStatus.FORBIDDEN, "인가가 실패했습니다."),
-
     ROLE_NOT_EXISTS(HttpStatus.FORBIDDEN, "권한이 존재하지 않습니다."),
 
 
@@ -37,6 +35,9 @@ public enum BasicErrorCode implements ErrorCode {
 
     // 409 CONFLICT
     DUPLICATED_ID(HttpStatus.CONFLICT, "중복된 계정입니다."),
+    DUPLICATED_EMAIL(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
+    DUPLICATED_USERID(HttpStatus.CONFLICT, "이미 존재하는 회원 아이디 입니다."),
+    DUPLICATED_NICKNAME(HttpStatus.CONFLICT, "이미 존재하는 닉네임 입니다."),
 
 
     // 500  INTERNAL_SERVER_ERROR
