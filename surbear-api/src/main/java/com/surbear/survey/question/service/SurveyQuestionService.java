@@ -29,10 +29,19 @@ public class SurveyQuestionService {
 
 
     @Transactional
-    public Long createSurvey(CreateSurveyRequest req) {
+    public Long createSurvey(CreateSurveyRequest req, Long authorId) {
         //TODO 지급 포인트 로직
         //TODO 순서 로직
-        return precedingService.createSurvey(req);
+        CreateSurveyRequest createSurveyRequest = CreateSurveyRequest.builder()
+                .surveyAuthorId(authorId)
+                .surveyType(req.surveyType())
+                .maximumNumberOfPeople(req.maximumNumberOfPeople())
+                .title(req.title())
+                .description(req.description())
+                .openType(req.openType())
+                .deadLine(req.deadLine())
+                .build();
+        return precedingService.createSurvey(createSurveyRequest);
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.surbear.example.controller;
 
 
+import com.surbear.configuration.authorization.Authorization;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.mock.example.model.Example;
@@ -9,6 +10,7 @@ import com.surbear.mock.example.model.SurveyTestResponse;
 import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.SurveyType;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,16 @@ public class ExampleController {
     @GetMapping("/error/500")
     public ResponseEntity<Void> internalServerError() {
         throw new ProcessErrorCodeException(BasicErrorCode.INTERNAL_SERVER_ERROR);
+    }
+
+    @Operation(summary = "토큰 인가", description = "토큰 인가 테스트")
+    @GetMapping("/authorization")
+    public Long testAuthorization(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId
+    ) {
+        return memberId;
     }
 
     @Operation(summary = "설문리스트 불러오는 mock api", description = "설문전체 조회 api 테스트 용")
