@@ -3,15 +3,12 @@ package com.surbear.member.service;
 import com.surbear.JwtTokenProvider;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
-import com.surbear.member.controller.dto.CertificationRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
 import com.surbear.member.entity.MemberEntity;
 import com.surbear.member.mapper.MemberMapper;
 import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
-import com.surbear.survey.question.model.Survey;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,28 +47,30 @@ public class MemberService {
     }
 
     @Transactional
-    public void changePassword(String email, String newPassword) {
+    public boolean changePassword(String email, String newPassword) {
         Member member = repository.findByEmail(email);
         MemberEntity newEntity = mapper.toEntity(member);
 
         newEntity.setPassword(newPassword);
         repository.save(newEntity);
+        return true;
     }
 
 
-    public void checkUserIdAndEmailExists(String userId, String email) {
+    public boolean checkUserIdAndEmailExists(String userId, String email) {
         Member member = repository.findByUserIdAndEmail(userId, email);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
-
+        return true;
     }
 
-    public void checkEmailExists(String email) {
+    public boolean checkEmailExists(String email) {
         Member member = repository.findByEmail(email);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
+        return true;
     }
 
     private Member checkUserIdExists(String userId) {

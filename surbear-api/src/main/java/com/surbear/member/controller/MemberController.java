@@ -9,7 +9,6 @@ import com.surbear.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,25 +38,9 @@ public class MemberController {
     }
 
     @Operation(summary = "비밀번호 재설정", description = "이메일을 기반으로 검색하여 비밀번호를 재설정한다")
-    @PostMapping("/password")
-    public ResponseEntity<Void> changePassword(@RequestBody ChangePasswordRequest req) {
-        memberService.changePassword(req.email(),req.newPassword());
-        return ResponseEntity.ok().build();
-    }
-
-    @Operation(summary = "아이디 찾기에서 존재하는 이메일인지 확인", description = "이메일이 존재하는 회원의 이메일인지 확인")
-    @GetMapping("/certification/email")
-    public ResponseEntity<Void> checkExistsEmail(@RequestParam String email) {
-        memberService.checkEmailExists(email);
-        return ResponseEntity.ok().build();
-    }
-
-
-    @Operation(summary = "비밀번호 찾기에서 유저가 존재하는지 확인", description = "userId와 email을 통해 조회해서 유저가 있는지 확인ㄴㄴ")
-    @GetMapping("/certification/password")
-    public ResponseEntity<Void> checkExistsEmailAndUserId(@RequestParam String userId, @RequestParam String email) {
-        memberService.checkUserIdAndEmailExists(userId, email);
-        return ResponseEntity.ok().build();
+    @PutMapping("/password")
+    public boolean changePassword(@RequestBody ChangePasswordRequest req) {
+        return memberService.changePassword(req.email(), req.newPassword());
     }
 
 }
