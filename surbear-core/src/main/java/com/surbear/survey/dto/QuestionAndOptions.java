@@ -1,19 +1,19 @@
 package com.surbear.survey.dto;
 
 import com.surbear.survey.constants.QuestionType;
+import com.surbear.survey.question.model.SurveyQuestion;
 import lombok.Builder;
 
 import java.util.List;
 
 @Builder
-public record QuestionAndOptions(Long questionId, QuestionType type, String content,
-                                 boolean required, Integer page, List<String>options) {
+public record QuestionAndOptions(SurveyQuestion surveyQuestion, List<String>options) {
 
-    public static QuestionAndOptions ofSubjectiveQuestion(Long questionId, QuestionType type, String content, boolean required, Integer page) {
-        return new QuestionAndOptions(questionId, type, content, required, page, List.of());
+    public static QuestionAndOptions ofSubjectiveQuestion(SurveyQuestion surveyQuestion) {
+        return new QuestionAndOptions(surveyQuestion, List.of());
     }
 
-    public static QuestionAndOptions ofObjectiveQuestion(Long questionId, QuestionType type, String content, boolean required, Integer page, List<String> options) {
-        return new QuestionAndOptions(questionId, type, content, required, page, List.copyOf(options));
+    public static QuestionAndOptions ofObjectiveQuestion(SurveyQuestion surveyQuestion, List<String> options) {
+        return new QuestionAndOptions(surveyQuestion, List.copyOf(options));
     }
 }

@@ -41,12 +41,10 @@ public class SurveyManagementService {
         return (surveyQuestion.questionType() == QuestionType.MULTIPLE_CHOICE)
                 ?
                 QuestionAndOptions
-                        .ofObjectiveQuestion(surveyQuestion.id(), surveyQuestion.questionType(), surveyQuestion.content(),
-                                surveyQuestion.required(), surveyQuestion.page(), precedingService.findAnswersByQuestionId(surveyQuestion.id()))
+                        .ofObjectiveQuestion(surveyQuestion, precedingService.findAnswersByQuestionId(surveyQuestion.id()))
                 :
                 QuestionAndOptions
-                        .ofSubjectiveQuestion(surveyQuestion.id(), surveyQuestion.questionType(), surveyQuestion.content(),
-                                surveyQuestion.required(), surveyQuestion.page());
+                        .ofSubjectiveQuestion(surveyQuestion);
     }
 
     public List<Survey> getSurveyList(Long surveyAuthorId) {
