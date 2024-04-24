@@ -24,11 +24,6 @@ public class MemberService {
 
     @Transactional
     public Long signUp(Member member) {
-        boolean checkEmailDuplicate = isEmailDuplicate(member.email());
-
-        if (checkEmailDuplicate) {
-            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_ID);
-        }
         return create(member);
     }
 
@@ -73,6 +68,15 @@ public class MemberService {
         return true;
     }
 
+    public boolean checkDuplicate(String type, String value){
+        return switch (type){
+            case "email" -> isEmailDuplicate(value);
+            case "userid" -> isUserIdDuplicate(value);
+            case "nickname" -> isNickNameDuplicate(value);
+            default -> throw new ProcessErrorCodeException(BasicErrorCode.INVALID_PARAMETER);
+        };
+    }
+
     private Member checkUserIdExists(String userId) {
         Member member = repository.findByUserId(userId);
         if (member == null) {
@@ -88,7 +92,29 @@ public class MemberService {
     }
 
     private boolean isEmailDuplicate(String email) {
-        return repository.countByEmail(email) > 0;
+        boolean duplicateFlag = repository.countByEmail(email) > 0;
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_EMAIL);
+        }
+        return true;
+    }
+
+    private boolean isUserIdDuplicate(String userId) {
+        boolean duplicateFlag = repository.countByUserId(userId) > 0;
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_USERID);
+        }
+        return true;
+    }
+
+
+    private boolean isNickNameDuplicate(String nickName) {
+        boolean duplicateFlag = repository.countByNickname(nickName) > 0;
+
+        if (duplicateFlag) {
+            throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_NICKNAME);
+        }
+        return true;
     }
 
 

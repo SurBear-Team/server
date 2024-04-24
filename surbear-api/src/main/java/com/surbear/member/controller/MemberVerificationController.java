@@ -1,13 +1,11 @@
 package com.surbear.member.controller;
 
+import com.surbear.member.controller.dto.CheckDuplicateRequest;
 import com.surbear.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -29,5 +27,11 @@ public class MemberVerificationController {
     @GetMapping("/password")
     public boolean checkExistsEmailAndUserId(@RequestParam String userId, @RequestParam String email) {
         return memberService.checkUserIdAndEmailExists(userId, email);
+    }
+
+    @Operation(summary = "통합(이메일, 유저아이디, 닉네임) 중복 검사", description = "")
+    @PostMapping("/duplicate")
+    public boolean checkDuplicateEmail(@RequestBody CheckDuplicateRequest req) {
+        return memberService.checkDuplicate(req.type(),req.value());
     }
 }
