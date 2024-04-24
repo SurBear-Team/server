@@ -1,0 +1,1 @@
+ALTER TABLE roles CHANGE COLUMN role permission ENUM('USER', 'ADMIN') NOT NULL COMMENT '역할';

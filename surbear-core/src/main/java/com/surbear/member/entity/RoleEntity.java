@@ -1,7 +1,7 @@
 package com.surbear.member.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
-import com.surbear.member.constant.Role;
+import com.surbear.member.constant.Permission;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,10 +26,14 @@ public class RoleEntity extends BaseTimeEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Permission permission;
 
     @Builder.Default
     @Column
     boolean deleted = false;
+
+    public void delete() {
+        deleted = true;
+    }
 
 }
