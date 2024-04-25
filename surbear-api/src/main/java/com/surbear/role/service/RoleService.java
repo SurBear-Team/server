@@ -56,7 +56,7 @@ public class RoleService {
     }
 
     public List<AdminListResponse> getAdminList() {
-        List<RoleEntity> listRoleEntity = roleRepository.findAll();
+        List<RoleEntity> listRoleEntity = roleRepository.findAllByDeletedIsFalse();
 
         return listRoleEntity.stream().map(roleEntity -> {
             MemberEntity memberEntity = memberRepository.findById(roleEntity.getMemberId())
