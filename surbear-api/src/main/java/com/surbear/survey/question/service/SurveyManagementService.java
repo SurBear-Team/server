@@ -38,7 +38,7 @@ public class SurveyManagementService {
     }
 
     private QuestionAndOptions createQuestionAndOptions(SurveyQuestion surveyQuestion) {
-        return (surveyQuestion.questionType() == QuestionType.MULTIPLE_CHOICE)
+        return (surveyQuestion.questionType() == QuestionType.MULTIPLE_CHOICE || surveyQuestion.questionType() == QuestionType.SINGLE_CHOICE)
                 ?
                 QuestionAndOptions
                         .ofObjectiveQuestion(surveyQuestion, precedingService.findAnswersByQuestionId(surveyQuestion.id()))
