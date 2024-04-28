@@ -86,20 +86,25 @@ public class QuestionPrecedingService {
         return surveyRepository.findBySurveyAuthorId(surveyAuthorId);
     }
 
-    public SurveyQuestionEntity getSurveyQuestion(Long surveyId) {
-        return surveyQuestionRepository.findBySurveyId(surveyId);
+    public SurveyQuestion getSurveyQuestion(Long questionId){
+        SurveyQuestionEntity surveyQuestionEntity = surveyQuestionRepository.findById(questionId).get();
+        return surveyQuestionMapper.toModel(surveyQuestionEntity);
     }
 
     public List<SurveyQuestion> getAllSurveyQuestionsId(Long surveyId){
         return surveyQuestionRepository.findAllBySurveyId(surveyId);
     }
 
-    public List<SurveyQuestionOption> getSurveyQuestionOption(Long surveyQuestionId) {
+    public List<SurveyQuestionOption> getSurveyQuestionOptionList(Long surveyQuestionId) {
         return surveyQuestionOptionRepository.findByQuestionId(surveyQuestionId);
+    }
+    
+    public SurveyQuestionOptionEntity getSurveyQuestionOption(Long optionsId){
+        return surveyQuestionOptionRepository.findById(optionsId).get();
     }
 
     public List<SurveyQuestionOptionsList> findAnswersByQuestionId(Long surveyQuestionId){
-        List<SurveyQuestionOption> options = getSurveyQuestionOption(surveyQuestionId);
+        List<SurveyQuestionOption> options = getSurveyQuestionOptionList(surveyQuestionId);
 
         return options.stream()
                 .map(option -> new SurveyQuestionOptionsList(option.id(), option.answer()))
@@ -131,6 +136,16 @@ public class QuestionPrecedingService {
         newEntity.setOngoingType(req.type());
     }
 
+    @Transactional
+    public void updateSurveyQuestion(SurveyQuestionEntity surveyQuestionEntity){
+        surveyQuestionRepository.save(surveyQuestionEntity);
+    }
+
+    @Transactional
+    public void updateSurveyQuestionOption(SurveyQuestionOptionEntity surveyQuestionOptionEntity){
+        surveyQuestionOptionRepository.save(surveyQuestionOptionEntity);
+    }
+
     //DELETE
 
     @Transactional
@@ -145,5 +160,10 @@ public class QuestionPrecedingService {
     @Transactional
     public void deleteSurveyQuestionOptionList(Long surveyQuestionId) {
         surveyQuestionOptionRepository.markDeletedByQuestionId(surveyQuestionId);
+    }
+    
+    @Transactional
+    public void deleteSurveyQuestionOption(SurveyQuestionOptionEntity entity){
+        surveyQuestionOptionRepository.save(entity);
     }
 }

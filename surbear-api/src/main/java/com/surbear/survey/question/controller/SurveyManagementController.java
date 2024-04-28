@@ -3,6 +3,7 @@ package com.surbear.survey.question.controller;
 
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.QuestionAndOptions;
+import com.surbear.survey.dto.UpdateQuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.model.Survey;
@@ -47,7 +48,6 @@ public class SurveyManagementController {
     public Page<Survey> getSurveyByCreatedAt(@PathVariable int page, @PathVariable int number, @RequestParam SurveyType type) {
         return service.getSurveyByCreatedAt(page, number, type);
     }
-
 
     @Operation(summary = "내설문 단일 업데이트", description = "사용자 id와 입력하게 되는 수정값 기반 업데이트")
     @PutMapping("{surveyId}")
