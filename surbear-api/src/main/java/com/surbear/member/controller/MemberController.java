@@ -49,4 +49,10 @@ public class MemberController {
         return memberService.delete(memberId);
     }
 
+    @Operation(summary = "회원 정보 조회", description = "닉네임 기반 회원정보 조회")
+    @GetMapping("{nickname}")
+    public Member getMemberInfo(@PathVariable String nickname) {
+        return memberService.getMemberInfo(nickname);
+    }
+
 }

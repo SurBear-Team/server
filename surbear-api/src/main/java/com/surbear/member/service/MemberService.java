@@ -53,6 +53,10 @@ public class MemberService {
         return true;
     }
 
+    public Member getMemberInfo(String nickname) {
+        return checkNicknameExists(nickname);
+    }
+
 
     public boolean checkUserIdAndEmailExists(String userId, String email) {
         Member member = repository.findByUserIdAndEmail(userId, email);
@@ -81,6 +85,14 @@ public class MemberService {
 
     private Member checkUserIdExists(String userId) {
         Member member = repository.findByUserId(userId);
+        if (member == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+        return member;
+    }
+
+    private Member checkNicknameExists(String nickname) {
+        Member member = repository.findByNicknameAndDeletedIsFalse(nickname);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }

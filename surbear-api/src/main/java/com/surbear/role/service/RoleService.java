@@ -34,7 +34,7 @@ public class RoleService {
 
     @Transactional
     public Long adminRegistration(String nickname) {
-        Member newEntity = memberRepository.findByNickname(nickname);
+        Member newEntity = memberRepository.findByNicknameAndDeletedIsFalse(nickname);
 
         validAdmin(newEntity);
         checkDuplicationAdmin(newEntity.id());
