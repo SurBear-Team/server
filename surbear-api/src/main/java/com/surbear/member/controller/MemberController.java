@@ -1,12 +1,14 @@
 package com.surbear.member.controller;
 
 
+import com.surbear.configuration.authorization.Authorization;
 import com.surbear.member.controller.dto.ChangePasswordRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
 import com.surbear.member.model.Member;
 import com.surbear.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -49,10 +51,18 @@ public class MemberController {
         return memberService.delete(memberId);
     }
 
-    @Operation(summary = "회원 정보 조회", description = "닉네임 기반 회원정보 조회")
+    @Operation(summary = "회원 정보 조회(관리자용)", description = "닉네임 기반 회원정보 조회")
     @GetMapping("{nickname}")
-    public Member getMemberInfo(@PathVariable String nickname) {
-        return memberService.getMemberInfo(nickname);
+    public Member getMemberInfoByNickname(@PathVariable String nickname) {
+        return memberService.getMemberInfoByNickname(nickname);
     }
 
+    @Operation(summary = "회원 정보 조회(사용자용)", description = "토큰 기반 회원정보 조회")
+    @GetMapping("")
+    public Member getMemberInfoByToken(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId) {
+        return memberService.getMemberInfoByToken(memberId);
+    }
 }

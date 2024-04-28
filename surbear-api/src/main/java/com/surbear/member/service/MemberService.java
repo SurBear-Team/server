@@ -53,8 +53,15 @@ public class MemberService {
         return true;
     }
 
-    public Member getMemberInfo(String nickname) {
+    public Member getMemberInfoByNickname(String nickname) {
         return checkNicknameExists(nickname);
+    }
+
+    public Member getMemberInfoByToken(Long memberId) {
+        MemberEntity memberEntity = repository.findById(memberId).get();
+        Member member = mapper.toModel(memberEntity);
+        return member;
+
     }
 
 
