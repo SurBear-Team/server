@@ -43,4 +43,16 @@ public class MemberController {
         return memberService.changePassword(req.email(), req.newPassword());
     }
 
+    @Operation(summary = "회원 탈퇴", description = "회원id를 기반으로 탈퇴")
+    @DeleteMapping("{memberId}")
+    public boolean delete(@PathVariable Long memberId) {
+        return memberService.delete(memberId);
+    }
+
+    @Operation(summary = "회원 정보 조회", description = "닉네임 기반 회원정보 조회")
+    @GetMapping("{nickname}")
+    public Member getMemberInfo(@PathVariable String nickname) {
+        return memberService.getMemberInfo(nickname);
+    }
+
 }

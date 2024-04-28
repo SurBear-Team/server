@@ -4,10 +4,7 @@ package com.surbear.survey.question.service;
 import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
-import com.surbear.survey.dto.CreateSurveyRequest;
-import com.surbear.survey.dto.QuestionAndOptions;
-import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
-import com.surbear.survey.dto.UpdateSurveyRequest;
+import com.surbear.survey.dto.*;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.entity.SurveyQuestionOptionEntity;
@@ -89,23 +86,28 @@ public class QuestionPrecedingService {
         return surveyRepository.findBySurveyAuthorId(surveyAuthorId);
     }
 
-    public SurveyQuestionEntity getSurveyQuestion(Long surveyId) {
-        return surveyQuestionRepository.findBySurveyId(surveyId);
+    public SurveyQuestion getSurveyQuestion(Long questionId){
+        SurveyQuestionEntity surveyQuestionEntity = surveyQuestionRepository.findById(questionId).get();
+        return surveyQuestionMapper.toModel(surveyQuestionEntity);
     }
 
     public List<SurveyQuestion> getAllSurveyQuestionsId(Long surveyId){
         return surveyQuestionRepository.findAllBySurveyId(surveyId);
     }
 
-    public List<SurveyQuestionOption> getSurveyQuestionOption(Long surveyQuestionId) {
+    public List<SurveyQuestionOption> getSurveyQuestionOptionList(Long surveyQuestionId) {
         return surveyQuestionOptionRepository.findByQuestionId(surveyQuestionId);
     }
+    
+    public SurveyQuestionOptionEntity getSurveyQuestionOption(Long optionsId){
+        return surveyQuestionOptionRepository.findById(optionsId).get();
+    }
 
-    public List<String> findAnswersByQuestionId(Long surveyQuestionId){
-        List<SurveyQuestionOption> options = getSurveyQuestionOption(surveyQuestionId);
+    public List<SurveyQuestionOptionsList> findAnswersByQuestionId(Long surveyQuestionId){
+        List<SurveyQuestionOption> options = getSurveyQuestionOptionList(surveyQuestionId);
 
         return options.stream()
-                .map(SurveyQuestionOption::answer)
+                .map(option -> new SurveyQuestionOptionsList(option.id(), option.answer()))
                 .collect(Collectors.toList());
     }
 
@@ -134,6 +136,16 @@ public class QuestionPrecedingService {
         newEntity.setOngoingType(req.type());
     }
 
+    @Transactional
+    public void updateSurveyQuestion(SurveyQuestionEntity surveyQuestionEntity){
+        surveyQuestionRepository.save(surveyQuestionEntity);
+    }
+
+    @Transactional
+    public void updateSurveyQuestionOption(SurveyQuestionOptionEntity surveyQuestionOptionEntity){
+        surveyQuestionOptionRepository.save(surveyQuestionOptionEntity);
+    }
+
     //DELETE
 
     @Transactional
@@ -148,5 +160,10 @@ public class QuestionPrecedingService {
     @Transactional
     public void deleteSurveyQuestionOptionList(Long surveyQuestionId) {
         surveyQuestionOptionRepository.markDeletedByQuestionId(surveyQuestionId);
+    }
+    
+    @Transactional
+    public void deleteSurveyQuestionOption(SurveyQuestionOptionEntity entity){
+        surveyQuestionOptionRepository.save(entity);
     }
 }

@@ -36,6 +36,4 @@ public class RoleController {
     public List<AdminListResponse> getAdminList() {
         return roleService.getAdminList();
     }
-
-    //TODO deleted true인것 조회 하지말기
 }

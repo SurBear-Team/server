@@ -48,6 +48,9 @@ public class MemberEntity extends BaseTimeEntity {
     @Column
     boolean deleted = false;
 
+    public void delete(){
+        deleted = true;
+    }
     public void setPassword(String password) {
         this.password = password;
     }

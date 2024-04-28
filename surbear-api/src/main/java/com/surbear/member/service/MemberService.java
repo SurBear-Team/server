@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -51,6 +53,10 @@ public class MemberService {
         return true;
     }
 
+    public Member getMemberInfo(String nickname) {
+        return checkNicknameExists(nickname);
+    }
+
 
     public boolean checkUserIdAndEmailExists(String userId, String email) {
         Member member = repository.findByUserIdAndEmail(userId, email);
@@ -68,8 +74,8 @@ public class MemberService {
         return true;
     }
 
-    public boolean checkDuplicate(String type, String value){
-        return switch (type){
+    public boolean checkDuplicate(String type, String value) {
+        return switch (type) {
             case "email" -> isEmailDuplicate(value);
             case "userid" -> isUserIdDuplicate(value);
             case "nickname" -> isNickNameDuplicate(value);
@@ -79,6 +85,14 @@ public class MemberService {
 
     private Member checkUserIdExists(String userId) {
         Member member = repository.findByUserId(userId);
+        if (member == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+        return member;
+    }
+
+    private Member checkNicknameExists(String nickname) {
+        Member member = repository.findByNicknameAndDeletedIsFalse(nickname);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
@@ -114,6 +128,17 @@ public class MemberService {
         if (duplicateFlag) {
             throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_NICKNAME);
         }
+        return true;
+    }
+
+    @Transactional
+    public boolean delete(Long memberId) {
+        MemberEntity memberEntity = repository.findById(memberId).get();
+
+        memberEntity.delete();
+
+        repository.save(memberEntity);
+
         return true;
     }
 

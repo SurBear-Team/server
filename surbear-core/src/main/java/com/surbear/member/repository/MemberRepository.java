@@ -22,7 +22,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     Member findByUserIdAndEmail(String userId, String email);
 
     Member findByUserId(String userId);
-    Member findByNickname(String nickname);
+    Member findByNicknameAndDeletedIsFalse(String nickname);
 
     Member findByEmail(String email);
 }
