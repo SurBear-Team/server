@@ -4,10 +4,7 @@ package com.surbear.survey.question.service;
 import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
-import com.surbear.survey.dto.CreateSurveyRequest;
-import com.surbear.survey.dto.QuestionAndOptions;
-import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
-import com.surbear.survey.dto.UpdateSurveyRequest;
+import com.surbear.survey.dto.*;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.entity.SurveyQuestionOptionEntity;
@@ -101,11 +98,11 @@ public class QuestionPrecedingService {
         return surveyQuestionOptionRepository.findByQuestionId(surveyQuestionId);
     }
 
-    public List<String> findAnswersByQuestionId(Long surveyQuestionId){
+    public List<SurveyQuestionOptionsList> findAnswersByQuestionId(Long surveyQuestionId){
         List<SurveyQuestionOption> options = getSurveyQuestionOption(surveyQuestionId);
 
         return options.stream()
-                .map(SurveyQuestionOption::answer)
+                .map(option -> new SurveyQuestionOptionsList(option.id(), option.answer()))
                 .collect(Collectors.toList());
     }
 
