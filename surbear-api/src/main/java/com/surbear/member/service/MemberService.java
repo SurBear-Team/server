@@ -29,8 +29,8 @@ public class MemberService {
 
     public LoginResponse login(LoginRequest req) {
         Member newEntity = checkUserIdExists(req.userId());
-
-        checkPasswordExists(req.password(), newEntity.password());
+        isAccountDeleted(newEntity);
+        verifyPassword(req.password(), newEntity.password());
         return LoginResponse.builder()
                 .accessToken(jwtTokenProvider.createToken(newEntity.id().toString()))
                 .build();
@@ -88,10 +88,18 @@ public class MemberService {
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
+
         return member;
     }
 
-    private void checkPasswordExists(String passwordToVerify, String referencePassword) {
+    private boolean isAccountDeleted(Member member){
+        if (member.deleted()){
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+        return true;
+    }
+
+    private void verifyPassword(String passwordToVerify, String referencePassword) {
         if (!passwordToVerify.equals(referencePassword)) {
             throw new ProcessErrorCodeException(BasicErrorCode.PASSWORD_MISMATCH);
         }
