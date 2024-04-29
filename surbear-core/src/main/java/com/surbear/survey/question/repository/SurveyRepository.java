@@ -35,6 +35,8 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
             """)
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
+    List<Survey> findAllBySurveyAuthorId(Long memberId);
+
     @Query("SELECT e FROM SurveyEntity e WHERE e.id IN :ids")
     List<SurveyEntity> findParticipatedSurveysByIds(@Param("ids") List<Long> ids);
 
