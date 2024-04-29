@@ -6,12 +6,16 @@ import com.surbear.member.controller.dto.ChangePasswordRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
 import com.surbear.member.model.Member;
+import com.surbear.member.service.FacadeMemberService;
 import com.surbear.member.service.MemberService;
+import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Tag(name = "회원", description = "회원 관련 API")
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    private final FacadeMemberService facadeMemberService;
 
     @Operation(summary = "회원가입", description = "유저정보를 전달받아 회원가입을 수행한다")
     @PostMapping("/signup")
@@ -51,12 +56,6 @@ public class MemberController {
         return memberService.delete(memberId);
     }
 
-    @Operation(summary = "회원 정보 조회(관리자용)", description = "닉네임 기반 회원정보 조회")
-    @GetMapping("{nickname}")
-    public Member getMemberInfoByNickname(@PathVariable String nickname) {
-        return memberService.getMemberInfoByNickname(nickname);
-    }
-
     @Operation(summary = "회원 정보 조회(사용자용)", description = "토큰 기반 회원정보 조회")
     @GetMapping("")
     public Member getMemberInfoByToken(
@@ -64,5 +63,14 @@ public class MemberController {
             @Parameter(hidden = true)
             Long memberId) {
         return memberService.getMemberInfoByToken(memberId);
+    }
+
+    @Operation(summary = "유저 참여 설문 기록 조회(사용자용)", description = "유저의 아이디를 기반으로 참여한 설문 기록을 조회한다")
+    @GetMapping("survey/history")
+    public List<ParticipatedSurvey> getParticipatedSurveyList(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId) {
+        return facadeMemberService.getParticipatedSurveyList(memberId);
     }
 }
