@@ -3,6 +3,7 @@ package com.surbear.survey.answer.controller;
 import com.surbear.survey.answer.model.SurveyAnswer;
 import com.surbear.survey.answer.service.SurveyAnswerService;
 import com.surbear.survey.dto.AnswerDto;
+import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,13 @@ public class SurveyAnswerController {
     @Operation(summary = "유저 답변 저장", description = "답변을 담은 answerDto 와 답변자의 아이디 입력")
     @PostMapping("/{surveyAnswerId}")
     public ResponseEntity<Void> createSurveyAnswer(@RequestBody List<AnswerDto> dto, @PathVariable Long surveyAnswerId) {
-        service.saveListMemberAnswer(surveyAnswerId,dto);
+        service.saveListMemberAnswer(surveyAnswerId, dto);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "유저 참여 설문 기록 조회", description = "유저의 아이디를 기반으로 참여한 설문 기록을 조회한다")
+    @GetMapping("participating/{memberId}")
+    public List<ParticipatedSurvey> getParticipatedSurveyList(@PathVariable Long memberId) {
+        return service.getParticipatedSurveyList(memberId);
     }
 }
