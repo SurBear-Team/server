@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "surveys_reports")
-public class ServeyReportEntity extends BaseTimeEntity {
+public class SurveyReportEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
