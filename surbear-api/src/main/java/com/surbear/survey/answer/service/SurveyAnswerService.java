@@ -21,15 +21,6 @@ public class SurveyAnswerService {
     private final AnswerPrecedingService precedingService;
 
     @Transactional
-    public List<ParticipatedSurvey> getParticipatedSurveyList(Long memberId) {
-        List<IdAndCreatedAtForSurveyHistory> historyRecords = precedingService.getSurveyIdsByMemberId(memberId);
-        List<Long> ids = precedingService.extractIdsFromHistoryRecords(historyRecords);
-        List<SurveyEntity> surveys = precedingService.fetchSurveysByIds(ids);
-        Map<Long, Instant> createdAtMap = precedingService.createCreatedAtMap(historyRecords);
-        return precedingService.convertToParticipatedSurveys(surveys, createdAtMap);
-    }
-
-    @Transactional
     public Long createSurveyAnswer(SurveyAnswer dto) {
         return precedingService.createSurveyAnswer(dto);
     }

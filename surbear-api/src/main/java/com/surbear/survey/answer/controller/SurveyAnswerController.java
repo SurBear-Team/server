@@ -32,10 +32,4 @@ public class SurveyAnswerController {
         service.saveListMemberAnswer(surveyAnswerId, dto);
         return ResponseEntity.ok().build();
     }
-
-    @Operation(summary = "유저 참여 설문 기록 조회", description = "유저의 아이디를 기반으로 참여한 설문 기록을 조회한다")
-    @GetMapping("participating/{memberId}")
-    public List<ParticipatedSurvey> getParticipatedSurveyList(@PathVariable Long memberId) {
-        return service.getParticipatedSurveyList(memberId);
-    }
 }
