@@ -5,6 +5,7 @@ import com.surbear.member.model.Member;
 import com.surbear.role.controller.dto.AdminListResponse;
 import com.surbear.role.service.FacadeRoleService;
 import com.surbear.role.service.RoleService;
+import com.surbear.survey.dto.survey.history.ParticipatedSurveyForAdmin;
 import com.surbear.survey.question.model.Survey;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -43,7 +44,7 @@ public class RoleController {
 
 
     @Operation(summary = "유저 설문조사 조회(관리자용)", description = "유저의 닉네임을 기반으로 ")
-    @GetMapping("participating")
+    @GetMapping("/participating")
     public List<Survey> getParticipatedSurveyList(@RequestParam String nickname) {
         return facadeRolePattern.getMemberSurveyRecord(nickname);
     }
@@ -52,5 +53,11 @@ public class RoleController {
     @GetMapping("{nickname}")
     public Member getMemberInfoByNickname(@PathVariable String nickname) {
         return facadeRolePattern.getMemberInfoByNickname(nickname);
+    }
+
+    @Operation(summary = "회원 설문조사 참여 내역(관리자용)", description = "닉네임 기반 회원설문조사 참여 내역")
+    @GetMapping("/participating/history")
+    public  List<ParticipatedSurveyForAdmin> getParticipatedSurveyHistoryList(@RequestParam String nickname) {
+        return facadeRolePattern.triggerGetParticipatedSurveyList(nickname);
     }
 }

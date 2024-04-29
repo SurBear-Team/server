@@ -66,7 +66,7 @@ public class MemberController {
     }
 
     @Operation(summary = "유저 참여 설문 기록 조회(사용자용)", description = "유저의 아이디를 기반으로 참여한 설문 기록을 조회한다")
-    @GetMapping("survey/history")
+    @GetMapping("/survey/history")
     public List<ParticipatedSurvey> getParticipatedSurveyList(
             @Authorization
             @Parameter(hidden = true)
