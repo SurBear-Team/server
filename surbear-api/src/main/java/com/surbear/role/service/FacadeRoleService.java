@@ -33,11 +33,6 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
 
     public List<ParticipatedSurveyForAdmin> triggerGetParticipatedSurveyList(String nickname){
         Long memberId = getMemberByNickname(nickname).id();
-        return getParticipatedSurveyList(memberId);
-    }
-
-    @Override
-    public List<ParticipatedSurveyForAdmin> getParticipatedSurveyList(Long memberId) {
         List<IdAndCreatedAtForSurveyHistory> historyRecords = getSurveyIdsByMemberId(memberId);
         List<Long> ids = extractIdsFromHistoryRecords(historyRecords);
         List<SurveyEntity> surveys = fetchSurveysByIds(ids);
@@ -45,7 +40,6 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
         return convertToParticipatedSurveys(surveys, createdAtMap);
     }
 
-    //밖에서 싸는 로직 하나추가해야할듯?
     @Override
     public List<IdAndCreatedAtForSurveyHistory> getSurveyIdsByMemberId(Long memberId) {
         return surveyAnswerRepository.findAllByMemberId(memberId);
@@ -89,8 +83,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
         Member newMember = getMemberByNickname(nickname);
         validGetMemberByNickname(newMember);
 
-        List<Survey> surveyList = getSurveyByMemberId(newMember.id());
-        return surveyList;
+        return getSurveyByMemberId(newMember.id());
     }
 
     public Member getMemberInfoByNickname(String nickname) {

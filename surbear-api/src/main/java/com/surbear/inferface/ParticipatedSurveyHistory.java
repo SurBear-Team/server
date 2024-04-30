@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 
 public interface ParticipatedSurveyHistory<T> {
 
-    List<T> getParticipatedSurveyList(Long memberId);
-
     List<IdAndCreatedAtForSurveyHistory> getSurveyIdsByMemberId(Long memberId);
 
     List<Long> extractIdsFromHistoryRecords(List<IdAndCreatedAtForSurveyHistory> historyRecords);

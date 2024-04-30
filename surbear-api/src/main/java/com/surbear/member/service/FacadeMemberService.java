@@ -26,7 +26,6 @@ public class FacadeMemberService implements ParticipatedSurveyHistory<Participat
 
 
     @Transactional
-    @Override
     public List<ParticipatedSurvey> getParticipatedSurveyList(Long memberId) {
         List<IdAndCreatedAtForSurveyHistory> historyRecords = getSurveyIdsByMemberId(memberId);
         List<Long> ids = extractIdsFromHistoryRecords(historyRecords);
