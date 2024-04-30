@@ -1,4 +1,4 @@
-package com.surbear.inferface;
+package com.surbear.common.inferface;
 
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
 import com.surbear.survey.dto.survey.history.ParticipatedSurvey;

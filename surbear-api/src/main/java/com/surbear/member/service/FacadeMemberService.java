@@ -1,7 +1,7 @@
 package com.surbear.member.service;
 
 
-import com.surbear.inferface.ParticipatedSurveyHistory;
+import com.surbear.common.inferface.ParticipatedSurveyHistory;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
 import com.surbear.survey.dto.survey.history.ParticipatedSurvey;

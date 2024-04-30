@@ -2,12 +2,11 @@ package com.surbear.role.service;
 
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
-import com.surbear.inferface.ParticipatedSurveyHistory;
+import com.surbear.common.inferface.ParticipatedSurveyHistory;
 import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
-import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import com.surbear.survey.dto.survey.history.ParticipatedSurveyForAdmin;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.model.Survey;
