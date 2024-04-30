@@ -1,4 +1,4 @@
-package com.surbear.inferface;
+package com.surbear.common.inferface;
 
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
 import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public interface ParticipatedSurveyHistory<T> {
-
-    List<T> getParticipatedSurveyList(Long memberId);
 
     List<IdAndCreatedAtForSurveyHistory> getSurveyIdsByMemberId(Long memberId);
 

@@ -29,6 +29,7 @@ public enum BasicErrorCode implements ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다."),
     PASSWORD_MISMATCH(HttpStatus.NOT_FOUND, "패스워드가 틀렸습니다"),
 
+
     // 408 REQUEST_TIMEOUT
     TIME_LIMIT_EXCEEDED_ERROR(HttpStatus.REQUEST_TIMEOUT, "요청 시간이 지났습니다"),
 
@@ -38,6 +39,7 @@ public enum BasicErrorCode implements ErrorCode {
     DUPLICATED_EMAIL(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
     DUPLICATED_USERID(HttpStatus.CONFLICT, "이미 존재하는 회원 아이디 입니다."),
     DUPLICATED_NICKNAME(HttpStatus.CONFLICT, "이미 존재하는 닉네임 입니다."),
+    CONFLICT(HttpStatus.CONFLICT, "중복된 수행입니다"),
 
 
     // 500  INTERNAL_SERVER_ERROR

@@ -4,5 +4,5 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum OngoingType {
-    PROGRESS, PAUSE, CLOSE, MODIFICATION
+    PROGRESS, PAUSE, CLOSE, MODIFICATION, DELETION, FORCED_DELETION
 }

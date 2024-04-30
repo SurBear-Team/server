@@ -82,8 +82,14 @@ public class QuestionPrecedingService {
                 .orElse(null);
     }
 
+
+
     public List<Survey> getSurveyByAuthorId(Long surveyAuthorId) {
-        return surveyRepository.findBySurveyAuthorId(surveyAuthorId);
+        return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalse(surveyAuthorId);
+    }
+
+    public List<Survey> getSurveyByAuthorIdAndOngoingType(Long surveyAuthorId) {
+        return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalseAndOngoingType(surveyAuthorId,OngoingType.FORCED_DELETION);
     }
 
     public SurveyQuestion getSurveyQuestion(Long questionId){

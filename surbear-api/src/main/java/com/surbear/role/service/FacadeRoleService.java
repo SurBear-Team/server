@@ -2,12 +2,11 @@ package com.surbear.role.service;
 
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
-import com.surbear.inferface.ParticipatedSurveyHistory;
+import com.surbear.common.inferface.ParticipatedSurveyHistory;
 import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
-import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import com.surbear.survey.dto.survey.history.ParticipatedSurveyForAdmin;
 import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.model.Survey;
@@ -33,11 +32,6 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
 
     public List<ParticipatedSurveyForAdmin> triggerGetParticipatedSurveyList(String nickname){
         Long memberId = getMemberByNickname(nickname).id();
-        return getParticipatedSurveyList(memberId);
-    }
-
-    @Override
-    public List<ParticipatedSurveyForAdmin> getParticipatedSurveyList(Long memberId) {
         List<IdAndCreatedAtForSurveyHistory> historyRecords = getSurveyIdsByMemberId(memberId);
         List<Long> ids = extractIdsFromHistoryRecords(historyRecords);
         List<SurveyEntity> surveys = fetchSurveysByIds(ids);
@@ -45,7 +39,6 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
         return convertToParticipatedSurveys(surveys, createdAtMap);
     }
 
-    //밖에서 싸는 로직 하나추가해야할듯?
     @Override
     public List<IdAndCreatedAtForSurveyHistory> getSurveyIdsByMemberId(Long memberId) {
         return surveyAnswerRepository.findAllByMemberId(memberId);
@@ -89,8 +82,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
         Member newMember = getMemberByNickname(nickname);
         validGetMemberByNickname(newMember);
 
-        List<Survey> surveyList = getSurveyByMemberId(newMember.id());
-        return surveyList;
+        return getSurveyByMemberId(newMember.id());
     }
 
     public Member getMemberInfoByNickname(String nickname) {
@@ -98,11 +90,13 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     }
 
     private List<Survey> getSurveyByMemberId(Long memberId) {
-        return surveyRepository.findAllBySurveyAuthorId(memberId);
+        return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalse(memberId);
     }
 
+
+
     private Member getMemberByNickname(String nickname) {
-        return memberRepository.findByNickname(nickname);
+        return memberRepository.findByNicknameAndDeletedIsFalse(nickname);
     }
 
     private void validGetMemberByNickname(Member newMember) {
@@ -112,7 +106,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     }
 
     private Member checkNicknameExists(String nickname) {
-        Member member = memberRepository.findByNicknameAndDeletedIsFalse(nickname);
+        Member member = memberRepository.findByNicknameAndDeletedIsFalseAndDeletedIsFalse(nickname);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }

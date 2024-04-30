@@ -1,7 +1,7 @@
 package com.surbear.member.service;
 
 
-import com.surbear.inferface.ParticipatedSurveyHistory;
+import com.surbear.common.inferface.ParticipatedSurveyHistory;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
 import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
@@ -26,7 +26,6 @@ public class FacadeMemberService implements ParticipatedSurveyHistory<Participat
 
 
     @Transactional
-    @Override
     public List<ParticipatedSurvey> getParticipatedSurveyList(Long memberId) {
         List<IdAndCreatedAtForSurveyHistory> historyRecords = getSurveyIdsByMemberId(memberId);
         List<Long> ids = extractIdsFromHistoryRecords(historyRecords);

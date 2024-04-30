@@ -13,4 +13,6 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
     Long countByMemberId(Long memberId);
 
     List<RoleEntity> findAllByDeletedIsFalse();
+
+    Role findByMemberIdAndDeletedIsFalse(Long memberId);
 }
