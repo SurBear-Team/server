@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
@@ -22,8 +24,10 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     Member findByUserIdAndEmail(String userId, String email);
 
     Member findByUserId(String userId);
+
+    Member findByNicknameAndDeletedIsFalseAndDeletedIsFalse(String nickname);
+    
     Member findByNicknameAndDeletedIsFalse(String nickname);
-    Member findByNickname(String nickname);
 
     Member findByEmail(String email);
 }

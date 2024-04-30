@@ -35,12 +35,11 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
             """)
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
-    List<Survey> findAllBySurveyAuthorId(Long memberId);
+    List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalse(Long memberId);
+    List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalseAndOngoingType(Long memberId, OngoingType ongoingType);
 
     @Query("SELECT e FROM SurveyEntity e WHERE e.id IN :ids")
     List<SurveyEntity> findParticipatedSurveysByIds(@Param("ids") List<Long> ids);
-
-    List<Survey> findBySurveyAuthorId(Long surveyAuthorId);
 
     Page<Survey> findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType ongoingType, Pageable pageable);
 

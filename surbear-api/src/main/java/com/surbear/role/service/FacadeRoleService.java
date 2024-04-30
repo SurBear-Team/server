@@ -90,11 +90,13 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     }
 
     private List<Survey> getSurveyByMemberId(Long memberId) {
-        return surveyRepository.findAllBySurveyAuthorId(memberId);
+        return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalse(memberId);
     }
 
+
+
     private Member getMemberByNickname(String nickname) {
-        return memberRepository.findByNickname(nickname);
+        return memberRepository.findByNicknameAndDeletedIsFalse(nickname);
     }
 
     private void validGetMemberByNickname(Member newMember) {
@@ -104,7 +106,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     }
 
     private Member checkNicknameExists(String nickname) {
-        Member member = memberRepository.findByNicknameAndDeletedIsFalse(nickname);
+        Member member = memberRepository.findByNicknameAndDeletedIsFalseAndDeletedIsFalse(nickname);
         if (member == null) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }

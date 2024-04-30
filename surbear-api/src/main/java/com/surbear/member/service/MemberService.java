@@ -41,6 +41,19 @@ public class MemberService {
         return newMember.userId();
     }
 
+    public String findByNicknameById(Long id) {
+        MemberEntity memberEntity = repository.findById(id).get();
+        return memberEntity.getNickname();
+    }
+
+    public Member findByNicknameAndDeletedIsFalse(String nickname) {
+        Member newMember = repository.findByNicknameAndDeletedIsFalse(nickname);
+        if (newMember == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
+        }
+        return newMember;
+    }
+
     @Transactional
     public boolean changePassword(String email, String newPassword) {
         Member member = repository.findByEmail(email);
@@ -92,8 +105,8 @@ public class MemberService {
         return member;
     }
 
-    private boolean isAccountDeleted(Member member){
-        if (member.deleted()){
+    private boolean isAccountDeleted(Member member) {
+        if (member.deleted()) {
             throw new ProcessErrorCodeException(BasicErrorCode.USER_NOT_FOUND);
         }
         return true;
