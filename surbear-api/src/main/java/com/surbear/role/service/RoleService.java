@@ -70,6 +70,13 @@ public class RoleService {
         }).collect(Collectors.toList());
     }
 
+    public void checkPermissionExists(Long memberId) {
+        Role newEntity = roleRepository.findByMemberIdAndDeletedIsFalse(memberId);
+        if (newEntity == null) {
+            throw new ProcessErrorCodeException(BasicErrorCode.ROLE_NOT_EXISTS);
+        }
+    }
+
 
     private void checkDuplicationAdmin(Long memberId) {
         boolean duplicateFlag = roleRepository.countByMemberId(memberId) > 0;
@@ -77,6 +84,7 @@ public class RoleService {
             throw new ProcessErrorCodeException(BasicErrorCode.DUPLICATED_ID);
         }
     }
+
 
     private void validAdmin(Member member) {
         if (member == null) {
