@@ -5,6 +5,7 @@ import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
+import com.surbear.member.controller.dto.SetMemberInformationRequest;
 import com.surbear.member.entity.MemberEntity;
 import com.surbear.member.mapper.MemberMapper;
 import com.surbear.member.model.Member;
@@ -60,6 +61,15 @@ public class MemberService {
         MemberEntity newEntity = mapper.toEntity(member);
 
         newEntity.setPassword(newPassword);
+        repository.save(newEntity);
+        return true;
+    }
+
+    @Transactional
+    public boolean changeMemberInformation(SetMemberInformationRequest req, Long memberId) {
+        MemberEntity newEntity = repository.findById(memberId).get();
+
+        newEntity.setMemberInformation(req.age(), req.nickname());
         repository.save(newEntity);
         return true;
     }
