@@ -5,6 +5,7 @@ import com.surbear.configuration.authorization.Authorization;
 import com.surbear.member.controller.dto.ChangePasswordRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;
+import com.surbear.member.controller.dto.SetMemberInformationRequest;
 import com.surbear.member.model.Member;
 import com.surbear.member.service.FacadeMemberService;
 import com.surbear.member.service.MemberService;
@@ -48,6 +49,16 @@ public class MemberController {
     @PutMapping("/password")
     public boolean changePassword(@RequestBody ChangePasswordRequest req) {
         return memberService.changePassword(req.email(), req.newPassword());
+    }
+
+    @Operation(summary = "회원정보 수정", description = "닉네임과 나이를 받아 수정가능해야한다.(인가)")
+    @PutMapping("/information")
+    public boolean changeMemberInformation(
+            @RequestBody SetMemberInformationRequest req,
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId) {
+        return memberService.changeMemberInformation(req, memberId);
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원id를 기반으로 탈퇴")

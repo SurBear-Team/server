@@ -1,14 +1,15 @@
 package com.surbear.survey.question.controller;
 
 
+import com.surbear.configuration.authorization.Authorization;
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.QuestionAndOptions;
-import com.surbear.survey.dto.UpdateQuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
 import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.service.SurveyManagementService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,9 +27,13 @@ public class SurveyManagementController {
     private final SurveyManagementService service;
 
     @Operation(summary = "내설문 뷰 설문 리스트 조회", description = "사용자 id기반 설문 리스트 조회")
-    @GetMapping("/list/{surveyAuthorId}")
-    public List<Survey> getSurveyList(@PathVariable Long surveyAuthorId) {
-        return service.getSurveyList(surveyAuthorId);
+    @GetMapping("/list")
+    public List<Survey> getSurveyList(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId
+            ) {
+        return service.getSurveyList(memberId);
     }
 
     @Operation(summary = "내설문 단일 설문지 조회", description = "사용자 id기반 설문 조회")

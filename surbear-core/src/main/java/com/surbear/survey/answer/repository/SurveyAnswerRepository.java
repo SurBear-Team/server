@@ -14,4 +14,6 @@ public interface SurveyAnswerRepository extends JpaRepository<SurveyAnswerEntity
     Long findFirstByMemberIdAndSurveyIdAndDeletedIsFalse(Long memberId, Long surveyId);
 
     List<IdAndCreatedAtForSurveyHistory> findAllByMemberId(Long memberId);
+
+    Integer countAllByMemberId(Long memberId);
 }
