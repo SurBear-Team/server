@@ -2,7 +2,6 @@ package com.surbear.survey.question.service;
 
 
 import com.surbear.survey.constants.OngoingType;
-import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.*;
 import com.surbear.survey.question.entity.SurveyEntity;
@@ -81,8 +80,6 @@ public class QuestionPrecedingService {
                 .map(surveyMapper::toModel)
                 .orElse(null);
     }
-
-
 
     public List<Survey> getSurveyByAuthorId(Long memberId) {
         return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalse(memberId);

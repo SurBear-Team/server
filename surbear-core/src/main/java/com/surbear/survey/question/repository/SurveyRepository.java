@@ -45,5 +45,7 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
 
     Page<Survey> findByDeletedFalseAndOngoingTypeAndSurveyTypeOrderByStartDateDesc(OngoingType ongoingType, SurveyType surveyType, Pageable pageable);
 
+    Integer countAllBySurveyAuthorId(Long memberId);
+
 
 }
