@@ -29,7 +29,7 @@ public class SurveyQuestionController {
                              @Parameter(hidden = true)
                              Long memberId
     ) {
-        return service.createSurvey(req,memberId);
+        return service.createSurvey(req, memberId);
     }
 
     @Operation(summary = "새 질문 만들기", description = "새 질문 만들기에 해당하는 API, 바디에 DTO는 두개의 객체타입이니 확인하자")
@@ -41,6 +41,6 @@ public class SurveyQuestionController {
     @Operation(summary = "설문의 질문 & 선택지 수정", description = "주어진 dto를 보고 설문의 질문과 선택지를 수정한다")
     @PostMapping("/question-options")
     public boolean getSurveyByCreatedAt(@RequestBody UpdateQuestionAndOptions updateQuestionAndOptions) {
-        return service.updateSurveyQuestionAndOptions(updateQuestionAndOptions.surveyQuestion(),updateQuestionAndOptions.options());
+        return service.updateSurveyQuestionAndOptions(updateQuestionAndOptions.surveyQuestion(), updateQuestionAndOptions.options());
     }
 }

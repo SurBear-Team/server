@@ -6,8 +6,8 @@ import com.surbear.survey.dto.update.survey.ComparisonQuestionAndAnswer;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.entity.SurveyQuestionOptionEntity;
 import com.surbear.survey.question.model.SurveyQuestion;
-import com.surbear.survey.question.model.SurveyQuestionOption;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,13 +45,18 @@ public class SurveyQuestionService {
     }
 
     @Transactional
-    public boolean updateSurveyQuestionAndOptions(SurveyQuestion surveyQuestion, List<ComparisonQuestionAndAnswer> options) {
+    public boolean updateSurveyQuestionAndOptions(SurveyQuestion surveyQuestion,List<ComparisonQuestionAndAnswer> options) {
         Long questionId = surveyQuestion.id();
         SurveyQuestion newModel = precedingService.getSurveyQuestion(questionId);
         if (newModel.questionType() != surveyQuestion.questionType()) {
             deleteOptionsList(questionId);
         }
         updateQuestion(surveyQuestion);
+
+        if (options == null) {
+            return true;
+        }
+
         branchOptions(options, questionId);
         return true;
     }
@@ -83,9 +88,7 @@ public class SurveyQuestionService {
 
     private void branchOptions(List<ComparisonQuestionAndAnswer> options, Long surveyOptionId) {
         for (ComparisonQuestionAndAnswer list : options) {
-            if (list.afterChangeSurveyQuestionOptionList() == null && list.beforeChangeSurveyQuestionOptionList() == null) {
-                return;
-            } else if (list.afterChangeSurveyQuestionOptionList().deleteFlag()) {
+            if (list.afterChangeSurveyQuestionOptionList().deleteFlag()) {
                 deleteOptions(list);
             } else if (list.afterChangeSurveyQuestionOptionList().creationFlag()) {
                 createOptions(list, surveyOptionId);
