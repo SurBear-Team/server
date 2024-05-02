@@ -59,7 +59,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
 
     @Override
     public List<SurveyEntity> fetchSurveysByIds(List<Long> ids) {
-        return surveyRepository.findParticipatedSurveysByIds(ids);
+        return surveyRepository.findAllByIds(ids);
     }
 
     @Override
