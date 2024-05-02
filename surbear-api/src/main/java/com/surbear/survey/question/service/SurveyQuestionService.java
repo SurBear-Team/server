@@ -83,7 +83,9 @@ public class SurveyQuestionService {
 
     private void branchOptions(List<ComparisonQuestionAndAnswer> options, Long surveyOptionId) {
         for (ComparisonQuestionAndAnswer list : options) {
-            if (list.afterChangeSurveyQuestionOptionList().deleteFlag()) {
+            if (list.afterChangeSurveyQuestionOptionList() == null && list.beforeChangeSurveyQuestionOptionList() == null) {
+                return;
+            } else if (list.afterChangeSurveyQuestionOptionList().deleteFlag()) {
                 deleteOptions(list);
             } else if (list.afterChangeSurveyQuestionOptionList().creationFlag()) {
                 createOptions(list, surveyOptionId);
