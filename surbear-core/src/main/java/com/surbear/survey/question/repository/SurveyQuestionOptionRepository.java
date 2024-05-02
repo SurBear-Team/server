@@ -15,5 +15,5 @@ public interface SurveyQuestionOptionRepository extends JpaRepository<SurveyQues
     @Query("UPDATE SurveyQuestionOptionEntity sqoe SET sqoe.deleted = true WHERE sqoe.questionId = :questionId AND sqoe.deleted = false")
     void markDeletedByQuestionId(Long questionId);
 
-    List<SurveyQuestionOption> findByQuestionId(Long surveyId);
+    List<SurveyQuestionOption> findByQuestionIdAndDeletedIsFalse(Long surveyId);
 }

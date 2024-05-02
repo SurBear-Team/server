@@ -33,6 +33,7 @@ public class FacadeMemberService implements ParticipatedSurveyHistory<Participat
         Map<Long, Instant> createdAtMap = createCreatedAtMap(historyRecords);
         return convertToParticipatedSurveys(surveys, createdAtMap);
     }
+
     @Override
     public List<IdAndCreatedAtForSurveyHistory> getSurveyIdsByMemberId(Long memberId) {
         return surveyAnswerRepository.findAllByMemberId(memberId);
@@ -53,7 +54,7 @@ public class FacadeMemberService implements ParticipatedSurveyHistory<Participat
 
     @Override
     public List<SurveyEntity> fetchSurveysByIds(List<Long> ids) {
-        return surveyRepository.findParticipatedSurveysByIds(ids);
+        return surveyRepository.findAllByIds(ids);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class FacadeMemberService implements ParticipatedSurveyHistory<Participat
                         survey.getTitle(),
                         survey.isOpenType(),
                         survey.isDeleted(),
-                        createdAtMap.getOrDefault(survey.getId(), null)))
+                        createdAtMap.getOrDefault(survey.getId(), survey.getCreatedAt())))
                 .collect(Collectors.toList());
     }
 }

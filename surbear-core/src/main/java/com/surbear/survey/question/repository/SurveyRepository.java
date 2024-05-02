@@ -38,8 +38,8 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalse(Long memberId);
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalseAndOngoingType(Long memberId, OngoingType ongoingType);
 
-    @Query("SELECT e FROM SurveyEntity e WHERE e.id IN :ids")
-    List<SurveyEntity> findParticipatedSurveysByIds(@Param("ids") List<Long> ids);
+    @Query("SELECT s FROM SurveyEntity s WHERE s.id IN :ids")
+    List<SurveyEntity> findAllByIds(List<Long> ids);
 
     Page<Survey> findByDeletedFalseAndOngoingTypeOrderByStartDateDesc(OngoingType ongoingType, Pageable pageable);
 
