@@ -28,13 +28,14 @@ public class SurveyManagementController {
 
     @Operation(summary = "내설문 뷰 설문 리스트 조회", description = "사용자 id기반 설문 리스트 조회")
     @GetMapping("/list")
-    public List<Survey> getSurveyList(
+    public List<Survey> getSurveyListByMemberIdAndDeletedIsFalse(
             @Authorization
             @Parameter(hidden = true)
             Long memberId
-            ) {
-        return service.getSurveyList(memberId);
+    ) {
+        return service.getSurveyListByMemberIdAndDeletedIsFalse(memberId);
     }
+
 
     @Operation(summary = "내설문 단일 설문지 조회", description = "사용자 id기반 설문 조회")
     @GetMapping("{surveyId}")

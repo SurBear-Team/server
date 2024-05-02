@@ -54,7 +54,7 @@ public class SurveyManagementService {
                         .ofSubjectiveQuestion(surveyQuestion);
     }
 
-    public List<Survey> getSurveyList(Long surveyAuthorId) {
+    public List<Survey> getSurveyListByMemberIdAndDeletedIsFalse(Long surveyAuthorId) {
         return precedingService.getSurveyByAuthorId(surveyAuthorId);
     }
 
