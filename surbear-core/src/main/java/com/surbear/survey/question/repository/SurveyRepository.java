@@ -2,19 +2,14 @@ package com.surbear.survey.question.repository;
 
 import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.SurveyType;
-import com.surbear.survey.dto.GetSurveyListResponse;
 import com.surbear.survey.dto.UpdateSurveyRequest;
-import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
-import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import com.surbear.survey.question.entity.SurveyEntity;
-import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -35,7 +30,10 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
             """)
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
+    List<SurveyEntity> findAllBySurveyAuthorId(Long memberId);
+
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalse(Long memberId);
+
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalseAndOngoingType(Long memberId, OngoingType ongoingType);
 
     @Query("SELECT s FROM SurveyEntity s WHERE s.id IN :ids")
