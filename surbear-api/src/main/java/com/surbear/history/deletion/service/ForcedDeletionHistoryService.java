@@ -46,10 +46,10 @@ public class ForcedDeletionHistoryService {
 
         List<GetDeletionHistory> dtoList = forcedDeletionHistories.stream()
                 .map(history -> GetDeletionHistory.builder()
-                                .createdAt(history.createdAt())
-                                .nickname(getNickname(history.adminMemberId()))
-                                .title(getTitle(history.deletedSurveyId()))
-                                .build()
+                        .createdAt(history.createdAt())
+                        .nickname(getNickname(history.adminMemberId()))
+                        .title(getTitle(history.deletedSurveyId()))
+                        .build()
                 )
                 .toList();
 
@@ -79,7 +79,12 @@ public class ForcedDeletionHistoryService {
         checkDuplicate(surveyId);
         create(newModel);
         setOngoingType(surveyId);
+        setDeletedStatus(surveyId);
         return true;
+    }
+
+    private void setDeletedStatus(Long surveyId) {
+        questionPrecedingService.deleteSurvey(surveyId);
     }
 
     private void setOngoingType(Long surveyId) {
