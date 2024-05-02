@@ -95,11 +95,11 @@ public class QuestionPrecedingService {
     }
 
     public List<SurveyQuestion> getAllSurveyQuestionsId(Long surveyId){
-        return surveyQuestionRepository.findAllBySurveyId(surveyId);
+        return surveyQuestionRepository.findAllBySurveyIdAndDeletedIsFalse(surveyId);
     }
 
     public List<SurveyQuestionOption> getSurveyQuestionOptionList(Long surveyQuestionId) {
-        return surveyQuestionOptionRepository.findByQuestionId(surveyQuestionId);
+        return surveyQuestionOptionRepository.findByQuestionIdAndDeletedIsFalse(surveyQuestionId);
     }
     
     public SurveyQuestionOptionEntity getSurveyQuestionOption(Long optionsId){

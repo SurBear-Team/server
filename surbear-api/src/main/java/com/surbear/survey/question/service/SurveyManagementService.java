@@ -1,10 +1,13 @@
 package com.surbear.survey.question.service;
 
+import com.surbear.exception.ProcessErrorCodeException;
+import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.QuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;
 import com.surbear.survey.dto.UpdateSurveyRequest;
+import com.surbear.survey.question.entity.SurveyEntity;
 import com.surbear.survey.question.entity.SurveyQuestionEntity;
 import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.model.SurveyQuestion;
@@ -25,7 +28,11 @@ public class SurveyManagementService {
 
 
     public Survey getSurvey(Long surveyId) {
-        return precedingService.getSurvey(surveyId);
+        Survey survey = precedingService.getSurvey(surveyId);
+        if (survey.deleted()){
+            throw new ProcessErrorCodeException(BasicErrorCode.INVALID_PARAMETER);
+        }
+        return survey;
     }
 
     @Transactional
