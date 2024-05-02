@@ -2,6 +2,7 @@ package com.surbear.survey.question.service;
 
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
+import com.surbear.survey.constants.OngoingType;
 import com.surbear.survey.constants.QuestionType;
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.QuestionAndOptions;
@@ -77,6 +78,7 @@ public class SurveyManagementService {
         boolean hasQuestions = true;
 
         precedingService.deleteSurvey(surveyId);
+        precedingService.updateSurveyOnGoingType(new UpdateSurveyOngoingTypeRequest(surveyId,OngoingType.DELETION));
 
         while (hasQuestions) {
             SurveyQuestionEntity entity = precedingService.getSurveyQuestionDeletedIsFalse(surveyId);
