@@ -13,6 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000","http://localhost:8080","http://3.37.53.15:3000","http://3.37.53.15:8080","https://bizapi.giftishow.com")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowCredentials(false);
+                .allowCredentials(true);
     }
 }
