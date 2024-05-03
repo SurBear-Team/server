@@ -3,6 +3,7 @@ package com.surbear.member.controller;
 
 import com.surbear.configuration.authorization.Authorization;
 import com.surbear.member.service.MemberProfileService;
+import com.surbear.survey.dto.survey.history.MySurveyHistoryResponse;
 import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,7 +26,7 @@ public class MemberMyPageController {
 
     @Operation(summary = "프로필 내 설문조사 내역", description = "사용자 id기반 설문 리스트 조회(인가)")
     @GetMapping("/list")
-    public List<ParticipatedSurvey> getSurveyListByMemberIdAndDeletedIsFalse(
+    public List<MySurveyHistoryResponse> getSurveyListByMemberIdAndDeletedIsFalse(
             @Authorization
             @Parameter(hidden = true)
             Long memberId
