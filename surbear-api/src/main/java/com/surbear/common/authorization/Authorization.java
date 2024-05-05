@@ -1,4 +1,4 @@
-package com.surbear.configuration.authorization;
+package com.surbear.common.authorization;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

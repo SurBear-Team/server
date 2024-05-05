@@ -1,10 +1,9 @@
-package com.surbear.configuration.authorization;
+package com.surbear.common.authorization;
 
 import com.surbear.JwtTokenProvider;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;

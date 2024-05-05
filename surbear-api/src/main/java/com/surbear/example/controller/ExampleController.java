@@ -1,7 +1,7 @@
 package com.surbear.example.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.mock.example.model.Example;

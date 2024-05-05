@@ -1,7 +1,7 @@
 package com.surbear.survey.question.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.survey.constants.SurveyType;
 import com.surbear.survey.dto.QuestionAndOptions;
 import com.surbear.survey.dto.UpdateSurveyOngoingTypeRequest;

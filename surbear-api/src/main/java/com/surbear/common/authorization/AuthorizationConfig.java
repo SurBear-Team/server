@@ -1,4 +1,4 @@
-package com.surbear.configuration.authorization;
+package com.surbear.common.authorization;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

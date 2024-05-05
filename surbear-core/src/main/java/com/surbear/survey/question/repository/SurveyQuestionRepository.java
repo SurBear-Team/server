@@ -10,7 +10,7 @@ import java.util.List;
 public interface SurveyQuestionRepository extends JpaRepository<SurveyQuestionEntity, Long> {
     List<SurveyQuestion> findAllBySurveyIdAndDeletedIsFalse(Long surveyId);
 
-    SurveyQuestionEntity findBySurveyId(Long surveyQuestionId);
+    SurveyQuestionEntity findByIdAndDeletedIsFalse(Long surveyQuestionId);
 
     SurveyQuestionEntity findFirstBySurveyIdAndDeletedIsFalse(Long surveyId);
 
