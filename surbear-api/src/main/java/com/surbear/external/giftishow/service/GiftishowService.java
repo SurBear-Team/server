@@ -29,17 +29,17 @@ public class GiftishowService {
 //                "20");
 //    }
 
-    public GoodsDetailDto getGood() throws Exception {
-        return client.getGood(
-                "0111",
-                AUTHORIZATION_KEY,
-                generateAuthToken(),
-                "N",
-                "G00000280811");
-    }
-
-    private String generateAuthToken() throws Exception {
-        return aes256Util.encrypt(TOKEN_KEY, AUTHORIZATION_KEY);
-    }
+//    public GoodsDetailDto getGood() throws Exception {
+//        return client.getGood(
+//                "0111",
+//                AUTHORIZATION_KEY,
+//                generateAuthToken(),
+//                "N",
+//                "G00000280811");
+//    }
+//
+//    private String generateAuthToken() throws Exception {
+//        return aes256Util.encrypt(TOKEN_KEY, AUTHORIZATION_KEY);
+//    }
 
 }

@@ -23,9 +23,9 @@ public class GifitishowController {
 //        return service.getGoodsList();
 //    }
 
-    @PostMapping("/sample")
-    public GoodsDetailDto getGood() throws Exception {
-        return service.getGood();
-    }
+//    @PostMapping("/sample")
+//    public GoodsDetailDto getGood() throws Exception {
+//        return service.getGood();
+//    }
 
 }
