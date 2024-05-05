@@ -1,7 +1,7 @@
 package com.surbear.member.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.member.controller.dto.ChangePasswordRequest;
 import com.surbear.member.controller.dto.LoginRequest;
 import com.surbear.member.controller.dto.LoginResponse;

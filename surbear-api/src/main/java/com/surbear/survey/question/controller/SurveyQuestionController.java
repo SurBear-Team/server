@@ -1,17 +1,15 @@
 package com.surbear.survey.question.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.survey.dto.CreateSurveyRequest;
 import com.surbear.survey.dto.SurveyQuestionRequest;
 import com.surbear.survey.dto.UpdateQuestionAndOptions;
-import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.service.SurveyQuestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

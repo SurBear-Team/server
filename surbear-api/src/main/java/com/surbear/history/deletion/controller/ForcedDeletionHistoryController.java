@@ -1,7 +1,7 @@
 package com.surbear.history.deletion.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.history.deletion.controller.dto.DeletionRequest;
 import com.surbear.history.deletion.service.ForcedDeletionHistoryService;
 import com.surbear.survey.dto.deletion.GetDeletionHistory;

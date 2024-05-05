@@ -1,10 +1,9 @@
 package com.surbear.member.controller;
 
 
-import com.surbear.configuration.authorization.Authorization;
+import com.surbear.common.authorization.Authorization;
 import com.surbear.member.service.MemberProfileService;
 import com.surbear.survey.dto.survey.history.MySurveyHistoryResponse;
-import com.surbear.survey.dto.survey.history.ParticipatedSurvey;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
