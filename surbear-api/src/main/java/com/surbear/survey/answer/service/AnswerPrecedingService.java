@@ -9,6 +9,7 @@ import com.surbear.survey.answer.model.MemberAnswer;
 import com.surbear.survey.answer.model.SurveyAnswer;
 import com.surbear.survey.answer.repository.MemberAnswerRepository;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
+import com.surbear.survey.question.repository.SurveyQuestionRepository;
 import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,25 @@ public class AnswerPrecedingService {
     private final MemberAnswerRepository memberAnswerRepository;
     private final MemberAnswerMapper memberAnswerMapper;
     private final SurveyRepository surveyRepository;
+    private final SurveyQuestionRepository surveyQuestionRepository;
+
+    @Transactional
+    public void saveMemberAnswer(Long surveyAnswerId, Long questionId, List<String> answers) {
+        answers.forEach(answer -> {
+            MemberAnswer newDto = MemberAnswer.builder()
+                    .surveyQuestionId(questionId)
+                    .surveyAnswerId(surveyAnswerId)
+                    .answer(answer)
+                    .build();
+
+            createMemberAnswer(newDto);
+        });
+    }
+
+    public Long getSurveyAnswer(SurveyAnswer surveyAnswer) {
+        return surveyAnswerRepository.findFirstByMemberIdAndSurveyIdAndDeletedIsFalse(surveyAnswer.memberId(), surveyAnswer.surveyId());
+    }
+
 
     @Transactional
     public Long createSurveyAnswer(SurveyAnswer surveyAnswer) {
@@ -42,23 +62,6 @@ public class AnswerPrecedingService {
         MemberAnswerEntity savedEntity = memberAnswerRepository.save(newEntity);
 
         return savedEntity.getId();
-    }
-
-    @Transactional
-    public void saveMemberAnswer(Long surveyAnswerId, Long questionId, List<String> answers) {
-        answers.forEach(answer -> {
-            MemberAnswer newDto = MemberAnswer.builder()
-                    .surveyQuestionId(questionId)
-                    .surveyAnswerId(surveyAnswerId)
-                    .answer(answer)
-                    .build();
-
-            createMemberAnswer(newDto);
-        });
-    }
-
-    public Long getSurveyAnswer(SurveyAnswer surveyAnswer) {
-        return surveyAnswerRepository.findFirstByMemberIdAndSurveyIdAndDeletedIsFalse(surveyAnswer.memberId(), surveyAnswer.surveyId());
     }
 
 }
