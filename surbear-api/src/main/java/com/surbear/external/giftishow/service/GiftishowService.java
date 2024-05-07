@@ -27,7 +27,7 @@ public class GiftishowService {
         return client.getGoodsList(
                 GET_GOODS_LIST,
                 AUTHORIZATION_KEY,
-                key,
+                TOKEN_KEY,
                 "N",
                 "1",
                 "20"
