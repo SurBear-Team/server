@@ -16,16 +16,13 @@ import java.util.List;
 @Configuration
 public class GlobalSwaggerConfig {
 
-    private final String URL;
-
-    public GlobalSwaggerConfig(@Value("${springdoc.url}") String url) {
-        this.URL = url;
-    }
+    @Value("${springdoc.url}")
+    private String url;
 
     @Bean
     public OpenAPI customOpenAPI() {
         Server server = new Server();
-        server.setUrl(URL);
+        server.setUrl(url);
         return new OpenAPI()
                 .components(new Components().addSecuritySchemes("bearerAuth",
                         new SecurityScheme()
