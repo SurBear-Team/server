@@ -2,18 +2,14 @@ package com.surbear.external.giftishow.client;
 
 
 import com.surbear.external.giftishow.dto.ApiResponse;
-import com.surbear.external.giftishow.dto.GoodsList;
-import com.surbear.external.giftishow.dto.Result;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
 
-import java.util.Map;
-
-@HttpExchange("https://bizapi.giftishow.com")
+@HttpExchange("")
 public interface GiftishowAccessClient {
 
-    @PostExchange("/bizApi/goods")
+    @PostExchange("https://bizapi.giftishow.com/bizApi/goods")
     ApiResponse getGoodsList(
             @RequestParam("api_code") String api_code,
             @RequestParam("custom_auth_code") String custom_auth_code,
