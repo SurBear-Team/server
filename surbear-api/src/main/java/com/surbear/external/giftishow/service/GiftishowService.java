@@ -23,7 +23,6 @@ public class GiftishowService {
 
 
     public ApiResponse getGoodsList() throws Exception {
-        String key = generateAuthToken();
         return client.getGoodsList(
                 GET_GOODS_LIST,
                 AUTHORIZATION_KEY,
