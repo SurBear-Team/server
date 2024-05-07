@@ -3,11 +3,14 @@ package com.surbear.external.giftishow.service;
 
 import com.surbear.common.encryption.Aes256Util;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
-import com.surbear.external.giftishow.dto.GoodsDetailDto;
-import com.surbear.external.giftishow.dto.GoodsDto;
+import com.surbear.external.giftishow.dto.ApiResponse;
+import com.surbear.external.giftishow.dto.Result;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -19,27 +22,27 @@ public class GiftishowService {
     private final Aes256Util aes256Util;
 
 
-//    public GoodsDto getGoodsList() throws Exception {
-//        return client.getGoodsList(
-//                "0111",
-//                AUTHORIZATION_KEY,
-//                generateAuthToken(),
-//                "N",
-//                "1",
-//                "20");
-//    }
+    public ApiResponse getGoodsList() throws Exception {
+        return client.getGoodsList(
+                GET_GOODS_LIST,
+                AUTHORIZATION_KEY,
+                generateAuthToken(),
+                "N",
+                "1",
+                "20"
+        );
+    }
 
-//    public GoodsDetailDto getGood() throws Exception {
-//        return client.getGood(
-//                "0111",
-//                AUTHORIZATION_KEY,
-//                generateAuthToken(),
-//                "N",
-//                "G00000280811");
-//    }
-//
-//    private String generateAuthToken() throws Exception {
-//        return aes256Util.encrypt(TOKEN_KEY, AUTHORIZATION_KEY);
-//    }
+    private String generateAuthToken() throws Exception {
+        return aes256Util.encrypt(TOKEN_KEY, AUTHORIZATION_KEY);
+    }
+
+    @Value("${giftishow.key.authorization}")
+    private String AUTHORIZATION_KEY;
+
+    @Value("${giftishow.key.token}")
+    private String TOKEN_KEY;
+
+    private final static String GET_GOODS_LIST = "0101";
 
 }
