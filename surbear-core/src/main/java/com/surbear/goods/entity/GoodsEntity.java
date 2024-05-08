@@ -30,7 +30,7 @@ public class GoodsEntity extends BaseTimeEntity {
     @Column
     String salePrice;
     @Column
-    String goodsImgs;
+    String goodsImgS;
     @Column
     String goodsName;
     @Column
