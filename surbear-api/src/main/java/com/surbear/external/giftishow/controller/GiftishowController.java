@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @Tag(name = "기프티쇼", description = "기프티쇼 관련 외부 API")
 @RequiredArgsConstructor
@@ -27,6 +29,12 @@ public class GiftishowController {
     @GetMapping("/{page}/{number}")
     public Page<GoodsEntity> getGoodsList(@PathVariable int page, @PathVariable int number) throws Exception {
         return service.getGoodsToDb(page, number);
+    }
+
+    @Operation(summary = "상품 검색", description = "키워드만 일치하면 연관검색 가능")
+    @GetMapping("{name}")
+    public List<GoodsEntity> searchGoodsList(@PathVariable String name) throws Exception {
+        return service.searchGoodsByName(name);
     }
 
     @GetMapping("")

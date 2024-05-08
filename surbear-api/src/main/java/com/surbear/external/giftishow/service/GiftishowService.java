@@ -1,6 +1,8 @@
 package com.surbear.external.giftishow.service;
 
 
+import com.surbear.exception.ProcessErrorCodeException;
+import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
 import com.surbear.external.giftishow.dto.GoodsResponse;
 import com.surbear.external.giftishow.dto.GoodsResponseList;
@@ -57,6 +59,14 @@ public class GiftishowService {
         Pageable pageable = PageRequest.of(page, number);
 
         return goodsRepository.findAll(pageable);
+    }
+
+    public List<GoodsEntity> searchGoodsByName(String goodsName) {
+        List<GoodsEntity> goodsList = goodsRepository.findByGoodsNameContaining(goodsName);
+        if (goodsList.isEmpty()){
+            throw new ProcessErrorCodeException(BasicErrorCode.INVALID_PARAMETER);
+        }
+        return goodsList;
     }
 
     private void deleteAllGoods() {
