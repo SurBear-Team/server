@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -46,6 +48,10 @@ public class PaymentService {
                 .build();
 
         return create(paymentHistory);
+    }
+
+    public List<PaymentHistory> getPaymentHistoryList(Long memberId) {
+        return paymentHistoryRepository.findAllByMemberId(memberId);
     }
 
     private Long create(PaymentHistory paymentHistory) {
