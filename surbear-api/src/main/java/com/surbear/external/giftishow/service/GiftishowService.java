@@ -4,11 +4,20 @@ package com.surbear.external.giftishow.service;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
 import com.surbear.external.giftishow.dto.GoodsResponse;
 import com.surbear.external.giftishow.dto.GoodsResponseList;
+import com.surbear.goods.entity.GoodsEntity;
 import com.surbear.goods.mapper.GoodsMapper;
 import com.surbear.goods.model.Goods;
 import com.surbear.goods.repository.GoodsRepository;
+import com.surbear.survey.constants.OngoingType;
+import com.surbear.survey.constants.SurveyType;
+import com.surbear.survey.question.model.Survey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +33,11 @@ public class GiftishowService {
     private final GoodsMapper goodsMapper;
 
 
+    @Scheduled(cron = "0 0 2 * * *")
     @Transactional
     public void schedulerSaveGoods() throws Exception {
+        deleteAllGoods();
+
         GoodsResponseList goodsResponseList = getGoodsList();
 
         saveGoods(goodsResponseList);
@@ -39,6 +51,16 @@ public class GiftishowService {
             goodsRepository.save(goodsMapper.toEntity(goods));
         }
 
+    }
+
+    public Page<GoodsEntity> getGoodsToDb(int page, int number) {
+        Pageable pageable = PageRequest.of(page, number);
+
+        return goodsRepository.findAll(pageable);
+    }
+
+    private void deleteAllGoods() {
+        goodsRepository.deleteAll();
     }
 
     private GoodsResponseList getGoodsList() throws Exception {
