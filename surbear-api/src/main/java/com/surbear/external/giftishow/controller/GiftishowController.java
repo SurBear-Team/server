@@ -3,35 +3,32 @@ package com.surbear.external.giftishow.controller;
 
 import com.surbear.external.giftishow.dto.ApiResponse;
 import com.surbear.external.giftishow.dto.GoodsDetail;
-import com.surbear.external.giftishow.dto.GoodsList;
 import com.surbear.external.giftishow.service.GiftishowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 @Tag(name = "기프티쇼", description = "기프티쇼 관련 외부 API")
 @RequiredArgsConstructor
 @RequestMapping("/external")
-public class GifitishowController {
+public class GiftishowController {
 
     private final GiftishowService service;
 
     @Operation(summary = "기프티쇼 상품 리스트 가져오기 api", description = "")
-    @PostMapping("/list")
+    @GetMapping("/list")
     public ApiResponse getGoodsList() throws Exception {
         return service.getGoodsList();
     }
 
-    @GetMapping("/{goodsCode}")
-    public GoodsDetail getGood(@PathVariable String goodsCode) throws Exception {
+    @GetMapping("")
+    public GoodsDetail getGood(@RequestParam String goodsCode) throws Exception {
         return service.getGoods(goodsCode);
     }
 
