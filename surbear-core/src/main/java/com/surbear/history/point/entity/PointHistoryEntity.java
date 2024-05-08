@@ -42,4 +42,8 @@ public class PointHistoryEntity extends BaseTimeEntity {
     @Column
     boolean deleted = false;
 
+    public void delete() {
+        deleted = true;
+    }
+
 }

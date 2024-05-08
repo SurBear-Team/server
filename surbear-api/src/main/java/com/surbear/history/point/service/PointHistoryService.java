@@ -42,6 +42,7 @@ public class PointHistoryService {
 
         PointHistory pointHistory = createPointHistoryByCancel(adminId, memberId , paidPoint);
         create(pointHistory);
+        deletePointHistory(pointHistoryId);
     }
 
     @Transactional
@@ -115,5 +116,14 @@ public class PointHistoryService {
     private Long nicknameToId(String nickname){
         return memberService.findByNicknameAndDeletedIsFalse(nickname).id();
     }
+
+    private void deletePointHistory(Long pointHistoryId){
+        PointHistoryEntity pointHistoryEntity = pointHistoryRepository.findById(pointHistoryId).get();
+
+        pointHistoryEntity.delete();
+
+        pointHistoryRepository.save(pointHistoryEntity);
+    }
+
 
 }
