@@ -4,14 +4,11 @@ package com.surbear.external.giftishow.service;
 import com.surbear.common.encryption.Aes256Util;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
 import com.surbear.external.giftishow.dto.ApiResponse;
-import com.surbear.external.giftishow.dto.Result;
+import com.surbear.external.giftishow.dto.GoodsList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
-
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -29,13 +26,20 @@ public class GiftishowService {
                 TOKEN_KEY,
                 "N",
                 "1",
-                "20"
+                "10"
         );
     }
 
-    private String generateAuthToken() throws Exception {
-        return aes256Util.encrypt(TOKEN_KEY, AUTHORIZATION_KEY);
+    public GoodsList getGoods(String goodsCode) throws Exception {
+        return client.getGood(
+                GET_GOODS,
+                AUTHORIZATION_KEY,
+                TOKEN_KEY,
+                goodsCode,
+                "N"
+        );
     }
+
 
     @Value("${giftishow.key.authorization}")
     private String AUTHORIZATION_KEY;
@@ -44,5 +48,7 @@ public class GiftishowService {
     private String TOKEN_KEY;
 
     private final static String GET_GOODS_LIST = "0101";
+    private final static String GET_GOODS = "0111";
+
 
 }
