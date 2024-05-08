@@ -3,6 +3,7 @@ package com.surbear.payment.service;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.member.entity.MemberEntity;
+import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
 import com.surbear.payment.entity.PaymentHistoryEntity;
 import com.surbear.payment.mapper.PaymentMapper;
@@ -52,6 +53,11 @@ public class PaymentService {
 
     public List<PaymentHistory> getPaymentHistoryList(Long memberId) {
         return paymentHistoryRepository.findAllByMemberId(memberId);
+    }
+
+    public List<PaymentHistory> getPaymentHistoryList(String nickname) {
+        Member member = memberRepository.findByNicknameAndDeletedIsFalse(nickname);
+        return paymentHistoryRepository.findAllByMemberId(member.id());
     }
 
     public Long countPaymentHistory(Long memberId) {
