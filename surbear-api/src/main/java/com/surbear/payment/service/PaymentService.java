@@ -3,6 +3,7 @@ package com.surbear.payment.service;
 import com.surbear.exception.ProcessErrorCodeException;
 import com.surbear.exception.errorcode.BasicErrorCode;
 import com.surbear.member.entity.MemberEntity;
+import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
 import com.surbear.payment.entity.PaymentHistoryEntity;
 import com.surbear.payment.mapper.PaymentMapper;
@@ -13,6 +14,8 @@ import com.surbear.report.model.SurveyReport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -46,6 +49,19 @@ public class PaymentService {
                 .build();
 
         return create(paymentHistory);
+    }
+
+    public List<PaymentHistory> getPaymentHistoryList(Long memberId) {
+        return paymentHistoryRepository.findAllByMemberId(memberId);
+    }
+
+    public List<PaymentHistory> getPaymentHistoryList(String nickname) {
+        Member member = memberRepository.findByNicknameAndDeletedIsFalse(nickname);
+        return paymentHistoryRepository.findAllByMemberId(member.id());
+    }
+
+    public Long countPaymentHistory(Long memberId) {
+        return paymentHistoryRepository.countAllByMemberId(memberId);
     }
 
     private Long create(PaymentHistory paymentHistory) {

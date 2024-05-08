@@ -165,8 +165,8 @@ public class MemberService {
         return true;
     }
 
-
-    private Long create(Member member) {
+    @Transactional
+    public Long create(Member member) {
         MemberEntity memberEntity = mapper.toEntity(member);
 
         MemberEntity savedEntity = repository.save(memberEntity);
