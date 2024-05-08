@@ -60,4 +60,8 @@ public class MemberEntity extends BaseTimeEntity {
         this.age = age;
         this.nickname = nickname;
     }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
 }

@@ -7,7 +7,7 @@ import lombok.Builder;
 public record Goods(
         String goodsCode,
         String salePrice,
-        String goodsImgs,
+        String goodsImgS,
         String goodsName,
         String brandName,
         String goodsTypeDtlNm

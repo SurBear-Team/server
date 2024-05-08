@@ -9,4 +9,5 @@ public interface GoodsMapper {
     GoodsEntity toEntity(Goods model);
 
     Goods toModel(GoodsEntity entity);
+
 }

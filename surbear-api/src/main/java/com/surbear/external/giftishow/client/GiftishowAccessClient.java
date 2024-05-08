@@ -1,9 +1,8 @@
 package com.surbear.external.giftishow.client;
 
 
-import com.surbear.external.giftishow.dto.ApiResponse;
-import com.surbear.external.giftishow.dto.GoodsDetail;
-import com.surbear.external.giftishow.dto.GoodsList;
+import com.surbear.external.giftishow.dto.GoodsResponse;
+import com.surbear.external.giftishow.dto.GoodsResponseList;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -13,7 +12,7 @@ import org.springframework.web.service.annotation.PostExchange;
 public interface GiftishowAccessClient {
 
     @PostExchange("/bizApi/goods")
-    ApiResponse getGoodsList(
+    GoodsResponseList getGoodsList(
             @RequestParam("api_code") String api_code,
             @RequestParam("custom_auth_code") String custom_auth_code,
             @RequestParam("custom_auth_token") String custom_auth_token,
@@ -23,11 +22,11 @@ public interface GiftishowAccessClient {
     );
 
     @PostExchange("/bizApi/goods/{goods_code}")
-    GoodsDetail getGood(
+    GoodsResponse getGood(
+            @PathVariable("goods_code") String goodsCode,
             @RequestParam("api_code") String apiCode,
             @RequestParam("custom_auth_code") String customAuthCode,
             @RequestParam("custom_auth_token") String customAuthToken,
-            @PathVariable("goods_code") String goodsCode,
             @RequestParam("dev_yn") String devYn
     );
 }

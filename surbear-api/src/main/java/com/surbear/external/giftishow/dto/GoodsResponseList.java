@@ -1,8 +1,8 @@
 package com.surbear.external.giftishow.dto;
 
-public record ApiResponse(
+public record GoodsResponseList(
         String code,
         String message,
-        Result result
+        ResultList result
 ) {
 }
