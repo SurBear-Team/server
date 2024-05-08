@@ -24,6 +24,13 @@ public class PointHistoryController {
     private final PointHistoryService pointHistoryService;
 
 
+    @Operation(summary = "포인트 지급 내역 조회(관리자용)", description = "")
+    @GetMapping("")
+    public List<PointHistory> getPointHistoryForAdmin() {
+        return pointHistoryService.getPointHistoryForAdmin();
+    }
+
+
     @Operation(summary = "포인트 적립 내역 조회(회원용)", description = "인가를 통해서 포인트 내역을 조회한다.(회원용)")
     @GetMapping("/history")
     public List<PointHistory> getPointHistory(

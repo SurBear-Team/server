@@ -104,6 +104,10 @@ public class PointHistoryService {
         return savedEntity.getId();
     }
 
+    public List<PointHistory> getPointHistoryForAdmin(){
+        return pointHistoryRepository.findAllByPaymentTypeAndDeletedIsFalse(PaymentType.ADMIN);
+    }
+
     public List<PointHistory> getPointHistory(Long memberId) {
         return pointHistoryRepository.findAllByRecipientId(memberId);
     }

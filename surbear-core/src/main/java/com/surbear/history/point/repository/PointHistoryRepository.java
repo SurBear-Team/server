@@ -1,5 +1,6 @@
 package com.surbear.history.point.repository;
 
+import com.surbear.history.point.constant.PaymentType;
 import com.surbear.history.point.entity.PointHistoryEntity;
 import com.surbear.history.point.model.PointHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,5 @@ public interface PointHistoryRepository extends JpaRepository<PointHistoryEntity
 
     List<PointHistory> findAllByRecipientId(Long recipientId);
     PointHistoryEntity findByIdAndDeletedIsFalse(Long id);
+    List<PointHistory> findAllByPaymentTypeAndDeletedIsFalse(PaymentType paymentType);
 }
