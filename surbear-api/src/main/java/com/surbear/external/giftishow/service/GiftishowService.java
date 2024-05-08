@@ -1,15 +1,18 @@
 package com.surbear.external.giftishow.service;
 
 
-import com.surbear.common.encryption.Aes256Util;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
 import com.surbear.external.giftishow.dto.GoodsResponse;
 import com.surbear.external.giftishow.dto.GoodsResponseList;
-import com.surbear.external.giftishow.dto.GoodsDetail;
+import com.surbear.goods.mapper.GoodsMapper;
+import com.surbear.goods.model.Goods;
+import com.surbear.goods.repository.GoodsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -17,17 +20,35 @@ import org.springframework.transaction.annotation.Transactional;
 public class GiftishowService {
 
     private final GiftishowAccessClient client;
-    private final Aes256Util aes256Util;
+    private final GoodsRepository goodsRepository;
+    private final GoodsMapper goodsMapper;
 
 
-    public GoodsResponseList getGoodsList() throws Exception {
+    @Transactional
+    public void schedulerSaveGoods() throws Exception {
+        GoodsResponseList goodsResponseList = getGoodsList();
+
+        saveGoods(goodsResponseList);
+    }
+
+
+    private void saveGoods(GoodsResponseList goodsResponseList) {
+        List<Goods> goodsList = goodsResponseList.result().goodsList();
+
+        for (Goods goods : goodsList) {
+            goodsRepository.save(goodsMapper.toEntity(goods));
+        }
+
+    }
+
+    private GoodsResponseList getGoodsList() throws Exception {
         return client.getGoodsList(
                 GET_GOODS_LIST,
                 AUTHORIZATION_KEY,
                 TOKEN_KEY,
                 "N",
                 "1",
-                "10"
+                "500"
         );
     }
 
