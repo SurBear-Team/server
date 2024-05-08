@@ -9,4 +9,5 @@ import java.util.List;
 public interface PointHistoryRepository extends JpaRepository<PointHistoryEntity, Long> {
 
     List<PointHistory> findAllByRecipientId(Long recipientId);
+    PointHistoryEntity findByIdAndDeletedIsFalse(Long id);
 }

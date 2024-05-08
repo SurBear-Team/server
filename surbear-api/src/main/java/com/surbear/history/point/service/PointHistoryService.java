@@ -29,6 +29,22 @@ public class PointHistoryService {
     private final MemberRepository memberRepository;
 
     @Transactional
+    public void cancelPayment(Long adminId, Long pointHistoryId) {
+        PointHistoryEntity pointHistoryEntity = pointHistoryRepository.findByIdAndDeletedIsFalse(pointHistoryId);
+
+        Long memberId = pointHistoryEntity.getRecipientId();
+        Integer paidPoint = pointHistoryEntity.getPaidPoint();
+
+        MemberEntity finedMember = memberRepository.findByIdAndDeletedIsFalse(memberId);
+        finedMember.setPoint(finedMember.getPoint() - paidPoint);
+
+        memberRepository.save(finedMember);
+
+        PointHistory pointHistory = createPointHistoryByCancel(adminId, memberId , paidPoint);
+        create(pointHistory);
+    }
+
+    @Transactional
     public void pointPayment(Long adminId, String nickname, Integer paidPoint) {
         Member member = memberService.findByNicknameAndDeletedIsFalse(nickname);
         MemberEntity memberEntity = memberMapper.toEntity(member);
@@ -62,6 +78,18 @@ public class PointHistoryService {
                 .recipientId(memberId)
                 .description("관리자가 지급")
                 .paymentType(PaymentType.ADMIN)
+                .paidPoint(paidPoint)
+                .deleted(false)
+                .build();
+    }
+
+    @Transactional
+    public PointHistory createPointHistoryByCancel(Long adminId, Long memberId, Integer paidPoint) {
+        return PointHistory.builder()
+                .payerId(adminId)
+                .recipientId(memberId)
+                .description("관리자가 취소")
+                .paymentType(PaymentType.CANCEL)
                 .paidPoint(paidPoint)
                 .deleted(false)
                 .build();

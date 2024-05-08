@@ -1,5 +1,7 @@
 package com.surbear.survey.answer.service;
 
+import com.surbear.member.entity.MemberEntity;
+import com.surbear.member.model.Member;
 import com.surbear.member.repository.MemberRepository;
 import com.surbear.survey.answer.model.SurveyAnswer;
 import com.surbear.survey.answer.repository.MemberAnswerRepository;
@@ -69,7 +71,11 @@ public class AnswerToResultService {
     }
 
     private AgeAndGender getMemberAgeAndGender(Long memberId) {
-        return memberRepository.findByIdAndDeletedIsFalse(memberId);
+        MemberEntity memberEntity = memberRepository.findByIdAndDeletedIsFalse(memberId);
+        return AgeAndGender.builder()
+                .age(memberEntity.getAge())
+                .gender(memberEntity.getGender())
+                .build();
     }
 
     private QuestionType getQuestionTypeById(Long questionId) {

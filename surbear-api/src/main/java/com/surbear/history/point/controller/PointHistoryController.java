@@ -48,4 +48,14 @@ public class PointHistoryController {
             @RequestParam String nickname, @RequestParam Integer paidPoint) {
         pointHistoryService.pointPayment(memberId, nickname, paidPoint);
     }
+
+    @Operation(summary = "포인트 지급 취소(관리자용)", description = "인가를 통해서 포인트를 취소한다.(회원용)")
+    @PostMapping("/canceling")
+    public void cancelPointHistory(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId,
+            @RequestParam Long pointHistoryId) {
+        pointHistoryService.cancelPayment(memberId, pointHistoryId);
+    }
 }
