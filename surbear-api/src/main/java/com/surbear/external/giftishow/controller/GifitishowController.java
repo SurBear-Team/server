@@ -2,12 +2,14 @@ package com.surbear.external.giftishow.controller;
 
 
 import com.surbear.external.giftishow.dto.ApiResponse;
+import com.surbear.external.giftishow.dto.GoodsDetail;
 import com.surbear.external.giftishow.dto.GoodsList;
-import com.surbear.external.giftishow.dto.Result;
 import com.surbear.external.giftishow.service.GiftishowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +30,9 @@ public class GifitishowController {
         return service.getGoodsList();
     }
 
-//    @PostMapping("/sample")
-//    public GoodsDetailDto getGood() throws Exception {
-//        return service.getGood();
-//    }
+    @GetMapping("/{goodsCode}")
+    public GoodsDetail getGood(@PathVariable String goodsCode) throws Exception {
+        return service.getGoods(goodsCode);
+    }
 
 }
