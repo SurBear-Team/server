@@ -1,6 +1,8 @@
 package com.surbear.history.point.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
+import com.surbear.history.point.constant.PaymentType;
+import com.surbear.member.constant.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -31,6 +33,10 @@ public class PointHistoryEntity extends BaseTimeEntity {
 
     @Column
     Integer paidPoint;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 
     @Builder.Default
     @Column
