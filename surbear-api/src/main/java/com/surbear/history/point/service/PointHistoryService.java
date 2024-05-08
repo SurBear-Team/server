@@ -5,6 +5,7 @@ import com.surbear.history.point.entity.PointHistoryEntity;
 import com.surbear.history.point.mapper.PointHistoryMapper;
 import com.surbear.history.point.model.PointHistory;
 import com.surbear.history.point.repository.PointHistoryRepository;
+import com.surbear.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ public class PointHistoryService {
 
     private final PointHistoryMapper pointHistoryMapper;
     private final PointHistoryRepository pointHistoryRepository;
+    private final MemberService memberService;
 
 
     public PointHistory createPointHistoryBySurvey(Long memberId, Integer paidPoint) {
@@ -40,6 +42,15 @@ public class PointHistoryService {
 
     public List<PointHistory> getPointHistory(Long memberId) {
         return pointHistoryRepository.findAllByRecipientId(memberId);
+    }
+
+    public List<PointHistory> getPointHistory(String nickname) {
+        Long id = nicknameToId(nickname);
+        return getPointHistory(id);
+    }
+
+    private Long nicknameToId(String nickname){
+        return memberService.findByNicknameAndDeletedIsFalse(nickname).id();
     }
 
 }
