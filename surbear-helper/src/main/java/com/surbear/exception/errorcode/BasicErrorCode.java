@@ -10,7 +10,7 @@ public enum BasicErrorCode implements ErrorCode {
 
     //  400 BAD_REQUEST
     INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "유효하지 않은 파라미터 입니다."),
-
+    INSUFFICIENT_POINTS(HttpStatus.BAD_REQUEST, "포인트가 부족합니다"),
 
     //  401 UNAUTHORIZED
     AUTHORIZATION_HEADER_NULL(HttpStatus.UNAUTHORIZED, "인증 헤더가 null입니다"),
