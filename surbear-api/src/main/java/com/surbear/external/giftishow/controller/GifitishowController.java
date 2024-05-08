@@ -2,6 +2,7 @@ package com.surbear.external.giftishow.controller;
 
 
 import com.surbear.external.giftishow.dto.ApiResponse;
+import com.surbear.external.giftishow.dto.GoodsDetail;
 import com.surbear.external.giftishow.dto.GoodsList;
 import com.surbear.external.giftishow.service.GiftishowService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +31,7 @@ public class GifitishowController {
     }
 
     @GetMapping("/{goodsCode}")
-    public GoodsList getGood(@PathVariable String goodsCode) throws Exception {
+    public GoodsDetail getGood(@PathVariable String goodsCode) throws Exception {
         return service.getGoods(goodsCode);
     }
 

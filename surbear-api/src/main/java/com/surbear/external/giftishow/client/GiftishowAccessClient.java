@@ -2,6 +2,7 @@ package com.surbear.external.giftishow.client;
 
 
 import com.surbear.external.giftishow.dto.ApiResponse;
+import com.surbear.external.giftishow.dto.GoodsDetail;
 import com.surbear.external.giftishow.dto.GoodsList;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public interface GiftishowAccessClient {
     );
 
     @PostExchange("/bizApi/goods/{goods_code}")
-    GoodsList getGood(
+    GoodsDetail getGood(
             @RequestParam("api_code") String apiCode,
             @RequestParam("custom_auth_code") String customAuthCode,
             @RequestParam("custom_auth_token") String customAuthToken,

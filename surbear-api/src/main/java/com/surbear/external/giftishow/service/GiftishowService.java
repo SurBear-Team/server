@@ -4,7 +4,7 @@ package com.surbear.external.giftishow.service;
 import com.surbear.common.encryption.Aes256Util;
 import com.surbear.external.giftishow.client.GiftishowAccessClient;
 import com.surbear.external.giftishow.dto.ApiResponse;
-import com.surbear.external.giftishow.dto.GoodsList;
+import com.surbear.external.giftishow.dto.GoodsDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class GiftishowService {
         );
     }
 
-    public GoodsList getGoods(String goodsCode) throws Exception {
+    public GoodsDetail getGoods(String goodsCode) throws Exception {
         return client.getGood(
                 GET_GOODS,
                 AUTHORIZATION_KEY,
