@@ -1,4 +1,4 @@
-package com.surbear.report.entity;
+package com.surbear.history.point.entity;
 
 import com.surbear.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
