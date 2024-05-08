@@ -54,6 +54,10 @@ public class PaymentService {
         return paymentHistoryRepository.findAllByMemberId(memberId);
     }
 
+    public Long countPaymentHistory(Long memberId) {
+        return paymentHistoryRepository.countAllByMemberId(memberId);
+    }
+
     private Long create(PaymentHistory paymentHistory) {
         PaymentHistoryEntity newEntity = paymentMapper.toEntity(paymentHistory);
 

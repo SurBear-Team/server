@@ -37,10 +37,19 @@ public class PaymentController {
 
     @Operation(summary = "상품 교환 내역 조회", description = "인가를 통해서 상품교환 내역을 확인한다.")
     @GetMapping("/history")
-    public List<PaymentHistory> getProductHistory(
+    public List<PaymentHistory> getPaymentHistory(
             @Authorization
             @Parameter(hidden = true)
             Long memberId) {
         return paymentService.getPaymentHistoryList(memberId);
+    }
+
+    @Operation(summary = "상품 교환 내역 조회 갯수 카운트", description = "인가를 통해서 상품교환 내역 갯수 를 확인한다.")
+    @GetMapping("/history/counting")
+    public Long countPaymentHistory(
+            @Authorization
+            @Parameter(hidden = true)
+            Long memberId) {
+        return paymentService.countPaymentHistory(memberId);
     }
 }
