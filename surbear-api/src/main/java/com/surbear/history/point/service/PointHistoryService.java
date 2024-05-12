@@ -63,7 +63,7 @@ public class PointHistoryService {
     @Transactional
     public PointHistory createPointHistoryBySurvey(Long memberId, Integer paidPoint) {
         return PointHistory.builder()
-                .payerId(0L)
+                .payerId(-1L)
                 .recipientId(memberId)
                 .description("설문조사 참여")
                 .paymentType(PaymentType.SURVEY)
@@ -91,6 +91,18 @@ public class PointHistoryService {
                 .recipientId(memberId)
                 .description("관리자가 취소")
                 .paymentType(PaymentType.CANCEL)
+                .paidPoint(paidPoint)
+                .deleted(false)
+                .build();
+    }
+
+    @Transactional
+    public PointHistory createPointHistoryByBuyProduct(Long memberId, Integer paidPoint) {
+        return PointHistory.builder()
+                .payerId(-10L)
+                .recipientId(memberId)
+                .description("상품구매")
+                .paymentType(PaymentType.BUY_PRODUCT)
                 .paidPoint(paidPoint)
                 .deleted(false)
                 .build();
