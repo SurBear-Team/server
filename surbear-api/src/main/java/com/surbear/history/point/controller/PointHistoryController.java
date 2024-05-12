@@ -1,6 +1,7 @@
 package com.surbear.history.point.controller;
 
 import com.surbear.common.authorization.Authorization;
+import com.surbear.history.point.controller.dto.PointHistoryAdminPage;
 import com.surbear.history.point.model.PointHistory;
 import com.surbear.history.point.service.PointHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +27,7 @@ public class PointHistoryController {
 
     @Operation(summary = "포인트 지급 내역 조회(관리자용)", description = "")
     @GetMapping("")
-    public List<PointHistory> getPointHistoryForAdmin() {
+    public List<PointHistoryAdminPage> getPointHistoryForAdmin() {
         return pointHistoryService.getPointHistoryForAdmin();
     }
 
@@ -40,13 +41,13 @@ public class PointHistoryController {
         return pointHistoryService.getPointHistory(memberId);
     }
 
-    @Operation(summary = "포인트 적립 내역 조회(관리자용)", description = "인가를 통해서 포인트 내역을 조회한다.(회원용)")
+    @Operation(summary = "포인트 적립 내역 조회(관리자용)", description = "인가를 통해서 포인트 내역을 조회한다")
     @GetMapping("/history/admin")
     public List<PointHistory> getPointHistory(@RequestParam String nickname) {
         return pointHistoryService.getPointHistory(nickname);
     }
 
-    @Operation(summary = "포인트 지급(관리자용)", description = "인가를 통해서 포인트를 지급한다.(회원용)")
+    @Operation(summary = "포인트 지급(관리자용)", description = "인가를 통해서 포인트를 지급한다")
     @PostMapping("")
     public void getPointHistory(
             @Authorization
@@ -56,7 +57,7 @@ public class PointHistoryController {
         pointHistoryService.pointPayment(memberId, nickname, paidPoint);
     }
 
-    @Operation(summary = "포인트 지급 취소(관리자용)", description = "인가를 통해서 포인트를 취소한다.(회원용)")
+    @Operation(summary = "포인트 지급 취소(관리자용)", description = "인가를 통해서 포인트를 취소한다")
     @PostMapping("/canceling")
     public void cancelPointHistory(
             @Authorization

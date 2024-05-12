@@ -2,6 +2,7 @@ package com.surbear.history.point.service;
 
 
 import com.surbear.history.point.constant.PaymentType;
+import com.surbear.history.point.controller.dto.PointHistoryAdminPage;
 import com.surbear.history.point.entity.PointHistoryEntity;
 import com.surbear.history.point.mapper.PointHistoryMapper;
 import com.surbear.history.point.model.PointHistory;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -116,8 +118,20 @@ public class PointHistoryService {
         return savedEntity.getId();
     }
 
-    public List<PointHistory> getPointHistoryForAdmin(){
-        return pointHistoryRepository.findAllByPaymentTypeAndDeletedIsFalse(PaymentType.ADMIN);
+    public List<PointHistoryAdminPage> getPointHistoryForAdmin() {
+        List<PointHistory> pointHistoryList = pointHistoryRepository.findAllByPaymentTypeAndDeletedIsFalse(PaymentType.ADMIN);
+        return pointHistoryList.stream()
+                .map(pointHistory -> PointHistoryAdminPage.builder()
+                        .id(pointHistory.id())
+                        .description(pointHistory.description())
+                        .payer(memberRepository.findByIdAndDeletedIsFalse(pointHistory.payerId()).getNickname())
+                        .recipient(memberRepository.findByIdAndDeletedIsFalse(pointHistory.recipientId()).getNickname())
+                        .paidPoint(pointHistory.paidPoint())
+                        .paymentType(pointHistory.paymentType())
+                        .deleted(pointHistory.deleted())
+                        .build()
+                )
+                .collect(Collectors.toList());
     }
 
     public List<PointHistory> getPointHistory(Long memberId) {
