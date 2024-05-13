@@ -45,7 +45,9 @@ public class SurveyAnswerService {
         Survey survey = getSurveyById(surveyId);
         PointHistory pointHistory = pointHistoryService.createPointHistoryBySurvey(surveyAnswerId, survey.point());
         pointHistoryService.create(pointHistory);
-        memberService.changePoint(surveyAnswerId,survey.point());
+
+        SurveyAnswer surveyAnswer = precedingService.getSurveyAnswerById(surveyAnswerId);
+        memberService.changePoint(surveyAnswer.memberId(),survey.point());
     }
 
     private void saveMemberAnswer(Long surveyAnswerId, AnswerDto dto) {

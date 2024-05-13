@@ -9,6 +9,7 @@ import com.surbear.survey.answer.model.MemberAnswer;
 import com.surbear.survey.answer.model.SurveyAnswer;
 import com.surbear.survey.answer.repository.MemberAnswerRepository;
 import com.surbear.survey.answer.repository.SurveyAnswerRepository;
+import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.repository.SurveyQuestionRepository;
 import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,10 @@ public class AnswerPrecedingService {
 
     public Long getSurveyAnswer(SurveyAnswer surveyAnswer) {
         return surveyAnswerRepository.findFirstByMemberIdAndSurveyIdAndDeletedIsFalse(surveyAnswer.memberId(), surveyAnswer.surveyId());
+    }
+
+    public SurveyAnswer getSurveyAnswerById(Long id) {
+        return surveyAnswerRepository.findByIdAndDeletedIsFalse(id);
     }
 
 
