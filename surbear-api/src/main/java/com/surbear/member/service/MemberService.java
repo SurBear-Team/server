@@ -66,6 +66,15 @@ public class MemberService {
     }
 
     @Transactional
+    public boolean changePoint(Long id, Integer point) {
+        MemberEntity memberEntity = repository.findByIdAndDeletedIsFalse(id);
+        Integer tmpPoint = memberEntity.getPoint();
+        memberEntity.setPoint(tmpPoint+ point);
+        repository.save(memberEntity);
+        return true;
+    }
+
+    @Transactional
     public boolean changeMemberInformation(SetMemberInformationRequest req, Long memberId) {
         MemberEntity newEntity = repository.findById(memberId).get();
 

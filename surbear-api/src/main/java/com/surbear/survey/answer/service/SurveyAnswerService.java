@@ -2,6 +2,7 @@ package com.surbear.survey.answer.service;
 
 import com.surbear.history.point.model.PointHistory;
 import com.surbear.history.point.service.PointHistoryService;
+import com.surbear.member.service.MemberService;
 import com.surbear.survey.answer.model.SurveyAnswer;
 import com.surbear.survey.dto.AnswerDto;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
@@ -26,6 +27,7 @@ public class SurveyAnswerService {
     private final AnswerPrecedingService precedingService;
     private final PointHistoryService pointHistoryService;
     private final QuestionPrecedingService questionPrecedingService;
+    private final MemberService memberService;
 
     @Transactional
     public Long createSurveyAnswer(SurveyAnswer dto) {
@@ -43,6 +45,7 @@ public class SurveyAnswerService {
         Survey survey = getSurveyById(surveyId);
         PointHistory pointHistory = pointHistoryService.createPointHistoryBySurvey(surveyAnswerId, survey.point());
         pointHistoryService.create(pointHistory);
+        memberService.changePoint(surveyAnswerId,survey.point());
     }
 
     private void saveMemberAnswer(Long surveyAnswerId, AnswerDto dto) {
