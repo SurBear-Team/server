@@ -40,13 +40,13 @@ public class SurveyAnswerService {
             saveMemberAnswer(surveyAnswerId, dto);
         });
         Long questionId = list.get(0).questionId();
+        SurveyAnswer surveyAnswer = precedingService.getSurveyAnswerById(surveyAnswerId);
 
         Long surveyId = getSurveyIdByQuestionId(questionId);
         Survey survey = getSurveyById(surveyId);
-        PointHistory pointHistory = pointHistoryService.createPointHistoryBySurvey(surveyAnswerId, survey.point());
+        PointHistory pointHistory = pointHistoryService.createPointHistoryBySurvey(surveyAnswer.memberId(), survey.point());
         pointHistoryService.create(pointHistory);
 
-        SurveyAnswer surveyAnswer = precedingService.getSurveyAnswerById(surveyAnswerId);
         memberService.changePoint(surveyAnswer.memberId(),survey.point());
     }
 
