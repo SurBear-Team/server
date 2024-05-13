@@ -23,7 +23,6 @@ public class SurveyQuestionService {
 
     @Transactional
     public Long createSurvey(CreateSurveyRequest req, Long authorId) {
-        //TODO 지급 포인트 로직
         //TODO 순서 로직
         CreateSurveyRequest createSurveyRequest = CreateSurveyRequest.builder()
                 .surveyAuthorId(authorId)
