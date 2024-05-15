@@ -18,7 +18,7 @@ public class CertificationNumberProvider {
 
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final String NUMBERS = "0123456789";
-    private static final String SPECIAL_CHARS = "!@#$%^&*()_+";
+    private static final String ALPHANUM = LETTERS + NUMBERS;
     private static final SecureRandom random = new SecureRandom();
 
     public String generateRandomCertificationNumber() {
@@ -35,10 +35,9 @@ public class CertificationNumberProvider {
 
         numChars.add(LETTERS.charAt(random.nextInt(LETTERS.length())));
         numChars.add(NUMBERS.charAt(random.nextInt(NUMBERS.length())));
-        numChars.add(SPECIAL_CHARS.charAt(random.nextInt(SPECIAL_CHARS.length())));
 
-        for (int i = 3; i < length; i++) {
-            char nextChar = (char) (random.nextInt(94) + 33);
+        for (int i = 2; i < length; i++) {
+            char nextChar = ALPHANUM.charAt(random.nextInt(ALPHANUM.length()));
             numChars.add(nextChar);
         }
 
