@@ -31,7 +31,6 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
     List<SurveyEntity> findAllBySurveyAuthorId(Long memberId);
-
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalse(Long memberId);
 
     List<Survey> findAllBySurveyAuthorIdAndOngoingType(Long memberId, OngoingType ongoingType);

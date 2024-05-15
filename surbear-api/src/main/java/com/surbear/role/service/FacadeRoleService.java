@@ -9,6 +9,7 @@ import com.surbear.survey.answer.repository.SurveyAnswerRepository;
 import com.surbear.survey.dto.survey.history.IdAndCreatedAtForSurveyHistory;
 import com.surbear.survey.dto.survey.history.ParticipatedSurveyForAdmin;
 import com.surbear.survey.question.entity.SurveyEntity;
+import com.surbear.survey.question.mapper.SurveyMapper;
 import com.surbear.survey.question.model.Survey;
 import com.surbear.survey.question.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     private final SurveyRepository surveyRepository;
     private final MemberRepository memberRepository;
     private final SurveyAnswerRepository surveyAnswerRepository;
+    private final SurveyMapper surveyMapper;
 
 
     public List<ParticipatedSurveyForAdmin> triggerGetParticipatedSurveyList(String nickname){
@@ -90,7 +92,10 @@ public class FacadeRoleService implements ParticipatedSurveyHistory<Participated
     }
 
     private List<Survey> getSurveyByMemberId(Long memberId) {
-        return surveyRepository.findAllBySurveyAuthorIdAndDeletedIsFalse(memberId);
+        List<SurveyEntity> entities = surveyRepository.findAllBySurveyAuthorId(memberId);
+        return entities.stream()
+                .map(surveyMapper::toModel)
+                .collect(Collectors.toList());
     }
 
 
