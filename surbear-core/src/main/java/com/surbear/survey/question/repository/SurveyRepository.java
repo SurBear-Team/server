@@ -31,10 +31,9 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity, Long> {
     int updateSurvey(UpdateSurveyRequest dto, Long id);
 
     List<SurveyEntity> findAllBySurveyAuthorId(Long memberId);
-
     List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalse(Long memberId);
 
-    List<Survey> findAllBySurveyAuthorIdAndDeletedIsFalseAndOngoingType(Long memberId, OngoingType ongoingType);
+    List<Survey> findAllBySurveyAuthorIdAndOngoingType(Long memberId, OngoingType ongoingType);
 
     @Query("SELECT s FROM SurveyEntity s WHERE s.id IN :ids")
     List<SurveyEntity> findAllByIds(List<Long> ids);

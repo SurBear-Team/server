@@ -128,6 +128,7 @@ public class PointHistoryService {
                         .recipient(memberRepository.findByIdAndDeletedIsFalse(pointHistory.recipientId()).getNickname())
                         .paidPoint(pointHistory.paidPoint())
                         .paymentType(pointHistory.paymentType())
+                        .updatedAt(pointHistory.updatedAt())
                         .deleted(pointHistory.deleted())
                         .build()
                 )
