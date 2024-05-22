@@ -15,6 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                         , "http://3.37.53.15:3000"
                         , "http://3.37.53.15:8080"
                         , "https://api.surbear.site:443"
+                        , "https://app.surbear.site"
                         , "http://surbear.s3-website.ap-northeast-2.amazonaws.com"
                         , "https://surbear.s3-website.ap-northeast-2.amazonaws.com")
                 .allowedHeaders("*")
