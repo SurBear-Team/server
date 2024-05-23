@@ -1,0 +1,1 @@
+ALTER TABLE surveys MODIFY COLUMN description VARCHAR(300) NOT NULL;
