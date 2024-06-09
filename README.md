@@ -7,6 +7,12 @@
 - 가천대학교 24학년도 1학기 종합프로젝트(캡스톤디자인)에서 진행한 협업 프로젝트입니다.
 - 클라우드 시스템을 기반으로 한 설문조사 서비스를 개발하였으며, chatGPT3.5를 통해 질문을 추천 받을 수 있고, 결과를 각종 차트를 통해 시각적으로 확인할 수 있으며, 적립한 포인트를 통해 상품을 교환할 수 있는 서비스를 개발하였습니다.
 
+### 배포 주소
+---
+> 프론트 주소: https://app.surbear.site
+>
+> 백엔드 주소: https://api.surbear.site
+
 ### 개발 기간
 ---
 - 2024.03 ~ 2024.05
@@ -31,6 +37,8 @@
 
 <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> <img src="https://img.shields.io/badge/NOTION-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=white">
 
+<br><br>
+
 # 프론트엔드
 
 ## **Development**
@@ -40,6 +48,7 @@
 ## **Hybrid platform**
 <img src="https://img.shields.io/badge/CAPACITOR-119EFF?style=for-the-badge&logo=capacitor&logoColor=white">
 
+<br><br>
 
 # 백엔드
 
@@ -154,58 +163,3 @@ $ npm run dev
 > 프론트 주소: https://app.surbear.site
 > 
 > 백엔드 주소: https://api.surbear.site
-
-
-## 개발 팀원 소개
-
----
-
-## Team
-
-<table style="width:100%; border-collapse: collapse; border: 2px solid #dddddd;">
-    <tbody>
-        <tr>
-            <td style="text-align:center; padding: 10px;">
-                <a href="">
-                    <img src="https://avatars.githubusercontent.com/u/95222741?v=4" width="150px" alt="BE 임직찬" style="border-radius: 50%;"/>
-                    <br>
-                    <sub><b>BE 임직찬</b></sub>
-                </a>
-            </td>
-            <td style="text-align:center; padding: 10px;">
-                <a href="">
-                    <img src="https://avatars.githubusercontent.com/u/128457944?v=4" width="150px" alt="FE 김현중" style="border-radius: 50%;"/>
-                    <br>
-                    <sub><b>FE 김현중</b></sub>
-                </a>
-            </td>
-            <td style="text-align:center; padding: 10px;">
-                <a href="">
-                    <img src="https://avatars.githubusercontent.com/u/123955813?v=4" width="150px" alt="FE 윤장호" style="border-radius: 50%;"/>
-                    <br>
-                    <sub><b>FE 윤장호</b></sub>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
