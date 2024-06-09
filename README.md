@@ -27,6 +27,7 @@
 
 <br />
 
+
 ### 기술 스택
 ---
 
@@ -37,7 +38,7 @@
 
 <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> <img src="https://img.shields.io/badge/NOTION-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=white">
 
-<br><br>
+<br /><br />
 
 # 프론트엔드
 
@@ -48,7 +49,7 @@
 ## **Hybrid platform**
 <img src="https://img.shields.io/badge/CAPACITOR-119EFF?style=for-the-badge&logo=capacitor&logoColor=white">
 
-<br><br>
+<br /><br />
 
 # 백엔드
 
@@ -117,11 +118,15 @@ $ npm run dev
 |---|---|
 |![image](https://github.com/SurBear-Team/surbear-frontend/assets/128457944/a9b7a702-749a-4e74-92ef-4f92764d4e78)|![image](https://github.com/SurBear-Team/surbear-frontend/assets/128457944/49172c99-bf34-462d-8aad-d731daddfda2)
 
+<br />
 
 ## ERD
 ---
-![surbear-erd](https://github.com/SurBear-Team/surbear-server/blob/fa034b091693d297caf77064a7612bb29489a660/picture/surbear-erd.png)
+![surbear-erd](https://github.com/SurBear-Team/surbear-server/blob/00054e63a80f67ae3e2fb7f919e6e6a4f7815dac/picture/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-06-09%20%EC%98%A4%ED%9B%84%207.55.41.png)
 
+</ br>
+
+![surbear-erd](https://github.com/SurBear-Team/surbear-server/blob/00054e63a80f67ae3e2fb7f919e6e6a4f7815dac/picture/surbear-erd.png)
 
 
 
