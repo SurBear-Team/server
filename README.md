@@ -118,3 +118,19 @@ $ npm run dev
 |![image](https://github.com/SurBear-Team/surbear-frontend/assets/128457944/a9b7a702-749a-4e74-92ef-4f92764d4e78)|![image](https://github.com/SurBear-Team/surbear-frontend/assets/128457944/49172c99-bf34-462d-8aad-d731daddfda2)
 
 
+## ERD
+---
+![surbear-erd](https://github.com/SurBear-Team/surbear-server/blob/fa034b091693d297caf77064a7612bb29489a660/picture/surbear-erd.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
